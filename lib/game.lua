@@ -17,24 +17,27 @@ end
 function Game:initialize(endsReached, advanceToEndgame)
 	self.advanceToEndgame = advanceToEndgame
 	self.endsReached = endsReached
+	self.scene = Scene:new()
 end
 
 function Game:start()
 end
-local bg = love.graphics.newImage("assets/img/background.png")
-local wg = love.graphics.newImage("assets/img/desert_island.png")
+
 
 function Game:draw()
-	love.graphics.draw(bg)
+	self.scene:start()
 	love.graphics.stencil(glassStencil, "replace", 1)
 	love.graphics.setStencilTest("greater", 0)
 	-- draw background
-	love.graphics.draw(wg)
+	self.scene:draw_location();
 	-- draw prop
+	self.scene:draw_prop();
 	love.graphics.setStencilTest()
 	-- draw person
+	self.scene:draw_person();
 	love.graphics.setStencilTest("greater", 0)
 	-- draw action
+	self.scene:draw_action();
 	love.graphics.setStencilTest()
 	-- draw menu
 	-- draw glass / mouse

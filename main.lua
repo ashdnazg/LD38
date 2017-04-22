@@ -3,7 +3,7 @@ math.random()
 
 require 'lib/game'
 require 'lib/endgame'
-
+require 'lib/scene'
 local state, game, endgame
 
 
