@@ -4,7 +4,9 @@ math.random()
 require 'lib/game'
 require 'lib/endgame'
 require 'lib/scene'
+require 'lib/options'
 local state, game, endgame
+
 
 
 --TODO: nice transitions or something

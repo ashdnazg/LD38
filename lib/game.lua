@@ -3,8 +3,7 @@ local tween = require "3rdparty/tween"
 local lume = require "3rdparty/lume"
 
 Game = class('Game')
-
-local GLASS_RADIUS = 30
+local GLASS_RADIUS = 45
 
 
 local function glassStencil()
@@ -18,14 +17,17 @@ function Game:initialize(endsReached, advanceToEndgame)
 	self.advanceToEndgame = advanceToEndgame
 	self.endsReached = endsReached
 	self.scene = Scene:new()
+	self.options = Options:new()
 end
 
 function Game:start()
+-- start new stage (crzy peorson again...)
+	self.scene:start()
+	self.options.set(self.scene:get())
 end
 
 
 function Game:draw()
-	self.scene:start()
 	love.graphics.stencil(glassStencil, "replace", 1)
 	love.graphics.setStencilTest("greater", 0)
 	-- draw background
@@ -40,6 +42,7 @@ function Game:draw()
 	self.scene:draw_action();
 	love.graphics.setStencilTest()
 	-- draw menu
+	self.options.draw()
 	-- draw glass / mouse
 end
 

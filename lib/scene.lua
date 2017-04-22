@@ -11,10 +11,10 @@ actionsPack = {
 
 }
 locationsPack  = {
-	{text = "bla bla" ,  src = "assets/img/background.png"}
+	{text = "bla bla" ,  src = "assets/img/locations/western_front.png"}
 }
 propPack  = {
-	{text = "bla bla" , src = "assets/img/background.png"}
+	{text = "bla bla" , src = "assets/img/generic props/somme.png"}
 }
 personPack  = {
 	{text = "bla bla" , src = "assets/img/test.jpg"}
@@ -29,9 +29,36 @@ function Scene:initialize()
 	  self.locationPosition = { x = {0,0}   , y = {0,0} }
 	  self.actionPosition   = { x = {440,440}   , y = {100,100} }
 end
+-- choose random text & id
+-- num number that want
+ function Scene:random_options(data,choose_id,num)
+	 local num = num or 5
+	 local all_avialible_options 	= {}    -- new array
+	 local options 		= {}
+	 local already_in 	= {}
+	 already_in[choose_id] = true;
+	 while 1 do
+		local count = 0
+		 for i=1, #data do
+			 if not already_in[i] then
+				count = count + 1
+				all_avialible_options[count] = { id = i ,text = data[i]["text"]}
+			 end
+		 end
+		if #all_avialible_options == 0 or num <= #options then
+			break
+		end
+		local id_pick = math.random(1,#all_avialible_options) 
+		options[#options+1] = all_avialible_options[id_pick] 
+		already_in[id_pick] = true
+	 end
+	 return options
+	
+ end
 -- return the choosen values + id , img
 function Scene:get()
-	return {location = self.choosen_locatio ,person = self.choosen_person, action = self.choosen_action , prop = self.choosen_prop}
+	local get_random_options = {loation = self:random_options(self.choosen_location,self.choosen_location_id) , action = self:random_options(self.choosen_action,self.choosen_action_id) ,prop = self:random_options(self.choosen_prop,self.choosen_prop_id)}
+	return {random_options = get_random_options , location = self.choosen_location ,person = self.choosen_person, action = self.choosen_action , prop = self.choosen_prop}
 end
 -- setup the scene 
 function Scene:start()
@@ -63,6 +90,11 @@ function Scene:start()
    self.choosen_location 	= locationsPack[ self.choosen_location_id ]
    self.choosen_person 		= personPack[ self.choosen_person_id ]
    
+   -- set position
+   self.pick_position_location = self:draw_position(self.choosen_location,self.locationPosition) 
+   self.pick_position_prop = self:draw_position(self.choosen_prop,self.propPosition) 
+   self.pick_position_action = self:draw_position(self.choosen_action,self.actionPosition) 
+   self.pick_position_person = self:draw_position(self.choosen_person,self.personPosition) 
 end
 
 -- draws functions
@@ -73,20 +105,19 @@ function Scene:draw_position(data,box)
 	return {x = math.random(box["x"][1],box["x"][2]) ,  y = math.random(box["y"][1],box["y"][2]) }
 end
 function Scene:draw_location()
-	local position = self:draw_position(self.choosen_location,self.locationPosition) 
-	love.graphics.draw(self.choosen_location["img"],position["x"],position["y"])
+	love.graphics.draw(self.choosen_location["img"],self.pick_position_location["x"],self.pick_position_location["y"])
 end
 function Scene:draw_prop()
-	local position = self:draw_position(self.choosen_prop,self.propPosition) 
-	love.graphics.draw(self.choosen_prop["img"],position["x"],position["y"])
+	
+	love.graphics.draw(self.choosen_prop["img"],self.pick_position_prop["x"],self.pick_position_prop["y"])
 end
 function Scene:draw_action()
-	local position = self:draw_position(self.choosen_action,self.actionPosition) 
-	love.graphics.draw(self.choosen_action["img"],position["x"],position["y"])
+	
+	love.graphics.draw(self.choosen_action["img"],self.pick_position_action["x"],self.pick_position_action["y"])
 end
 function Scene:draw_person()
-	local position = self:draw_position(self.choosen_person,self.personPosition) 
-	love.graphics.draw(self.choosen_person["img"],position["x"],position["y"])
+	
+	love.graphics.draw(self.choosen_person["img"],self.pick_position_person["x"],self.pick_position_person["y"])
 end
 -- end draw functions
 
