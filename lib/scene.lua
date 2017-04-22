@@ -7,17 +7,35 @@ local lume = require "3rdparty/lume"
 -- tables with data 
 
 actionsPack = {
-	{text = "test" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"}
+	{text = "1111111" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
+	{text = "222222" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
+	{text = "33333333" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
+	{text = "4444444" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
+	{text = "55555555" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
+	{text = "6666666" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"}
 
 }
 locationsPack  = {
-	{text = "bla bla" ,  src = "assets/img/locations/western_front.png"}
+	{text = "11111111" ,  src = "assets/img/locations/western_front.png"},
+	{text = "22222222" ,  src = "assets/img/locations/western_front.png"},
+	{text = "3333333" ,  src = "assets/img/locations/western_front.png"},
+	{text = "44444444" ,  src = "assets/img/locations/western_front.png"},
+	{text = "55555555" ,  src = "assets/img/locations/western_front.png"},
+	{text = "666666666" ,  src = "assets/img/locations/western_front.png"}
 }
 propPack  = {
-	{text = "bla bla" , src = "assets/img/generic props/somme.png"}
+	{text = "1111111" , src = "assets/img/generic props/somme.png"},
+	{text = "22222222" , src = "assets/img/generic props/somme.png"},
+	{text = "3333333" , src = "assets/img/generic props/somme.png"},
+	{text = "4444444" , src = "assets/img/generic props/somme.png"},
+	{text = "555555" , src = "assets/img/generic props/somme.png"},
+	{text = "6666666" , src = "assets/img/generic props/somme.png"}
 }
 personPack  = {
-	{text = "bla bla" , src = "assets/img/test.jpg"}
+	{text = "111111111" , src = "assets/img/person/person.png"},
+	{text = "222222222" , src = "assets/img/person/person.png"},
+	{text = "3333333333" , src = "assets/img/person/person.png"},
+	{text = "444444444" , src = "assets/img/person/person.png"},
 }
 
 
@@ -32,32 +50,33 @@ end
 -- choose random text & id
 -- num number that want
  function Scene:random_options(data,choose_id,num)
-	 local num = num or 5
-	 local all_avialible_options 	= {}    -- new array
-	 local options 		= {}
-	 local already_in 	= {}
-	 already_in[choose_id] = true;
-	 while 1 do
-		local count = 0
-		 for i=1, #data do
-			 if not already_in[i] then
-				count = count + 1
-				all_avialible_options[count] = { id = i ,text = data[i]["text"]}
-			 end
-		 end
-		if #all_avialible_options == 0 or num <= #options then
-			break
+	local num = num or 5
+	local options 		= {}
+	local all_avialible_options = {}
+	for i=1, #data do
+		if i ~= choose_id then
+			all_avialible_options[#all_avialible_options + 1] = { id = i ,text = data[i]["text"]}
 		end
+	end
+
+	while #all_avialible_options > 0 and num >= #options do
+		local count = 0
 		local id_pick = math.random(1,#all_avialible_options) 
-		options[#options+1] = all_avialible_options[id_pick] 
-		already_in[id_pick] = true
-	 end
-	 return options
+		options[#options+1] = all_avialible_options[id_pick]
+		all_avialible_options[id_pick] = all_avialible_options[#all_avialible_options]
+		all_avialible_options[#all_avialible_options] = nil
+	end
+	
+    num = 	 math.random(1, #options) 
+	options[num] = { id = choose_id ,text = data[choose_id]["text"]}
+	
+	return options
 	
  end
 -- return the choosen values + id , img
 function Scene:get()
-	local get_random_options = {loation = self:random_options(self.choosen_location,self.choosen_location_id) , action = self:random_options(self.choosen_action,self.choosen_action_id) ,prop = self:random_options(self.choosen_prop,self.choosen_prop_id)}
+ 
+	local get_random_options = {location = self:random_options(locationsPack,self.choosen_location_id) , action = self:random_options(actionsPack,self.choosen_action_id) ,prop = self:random_options(propPack,self.choosen_prop_id)}
 	return {random_options = get_random_options , location = self.choosen_location ,person = self.choosen_person, action = self.choosen_action , prop = self.choosen_prop}
 end
 -- setup the scene 
