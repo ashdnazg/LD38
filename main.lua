@@ -3,9 +3,10 @@ math.random()
 
 require 'lib/game'
 require 'lib/endgame'
+require 'lib/pregame'
 require 'lib/scene'
 require 'lib/options'
-local state, game, endgame
+local state, game, endgame, pregame
 
 
 
@@ -14,6 +15,12 @@ local function advanceToGame()
 	state = 'ingame'
 	love.graphics.setColor(255, 255, 255, 255)
 	game:start()
+end
+
+local function advanceToPreGame()
+	state = 'pregame'
+	love.graphics.setColor(255, 255, 255, 255)
+	pregame:start()
 end
 
 local function advanceToEndgame()
@@ -29,8 +36,9 @@ local function init()
 	music:play()
 	state = 'ingame'
 	game = Game:new(endsReached, advanceToEndgame)
-	endgame = Endgame:new(endsReached, advanceToGame)
-	advanceToGame()
+	endgame = Endgame:new(endsReached, advanceToPreGame)
+	pregame = PreGame:new(endsReached, advanceToGame)
+	advanceToPreGame()
 end
 
 function love.load()
@@ -42,6 +50,8 @@ function love.update(dt)
 		game:update(dt)
 	elseif state == 'endgame' then
 		endgame:update(dt)
+	elseif state == 'pregame' then
+		pregame:update(dt)
 	end
 end
 
@@ -50,6 +60,8 @@ function love.keypressed(key)
 		game:keyPress(key)
 	elseif state == 'endgame' then
 		endgame:keyPress(key)
+	elseif state == 'pregame' then
+		pregame:keyPress(key)
 	end
 end
 
@@ -58,6 +70,8 @@ function love.mousepressed(x, y, button)
 		game:mousePressed(x, y, button)
 	elseif state == 'endgame' then
 		endgame:mousePressed(x, y, button)
+	elseif state == 'pregame' then
+		pregame:mousePressed(x, y, button)
 	end
 end
 
@@ -66,5 +80,7 @@ function love.draw()
 		game:draw()
 	elseif state == "endgame" then
 		endgame:draw()
+	elseif state == 'pregame' then
+		pregame:draw()
 	end
 end
