@@ -25,6 +25,7 @@ local function init()
 	-- music:setVolume(0.2)
 	-- music:setLooping(true)
 	-- music:play()
+	love.window.setMode(640, 480)
 	state = 'ingame'
 	game = Game:new(endsReached, advanceToEndgame)
 	endgame = Endgame:new(endsReached, advanceToGame)
