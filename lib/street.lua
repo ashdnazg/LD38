@@ -89,7 +89,7 @@ end
 
 function Street:update(dt)
 	if self.timer:is_game_over() then
-		self.advanceTo('endgame')
+		self.advanceTo('defeat')
 	end
 	self.frameTime = self.frameTime - dt
 	self.animTime = self.animTime - dt
@@ -97,7 +97,7 @@ function Street:update(dt)
 		self.timer:count_time(dt)
 	end
 	if self.xPos > STREET_END and self.animTime <= 0 then
-		self.advanceTo('endgame')
+		self.advanceTo('victory')
 	end
 end
 
