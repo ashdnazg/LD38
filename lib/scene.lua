@@ -60,8 +60,8 @@ personPack  = {
 	{text_b = "We made that pie together once! Oh and remember that time???"
 		, text_a = "MAN and then we had that steak and went bowling..." , src = "assets/img/person/person6.png"},
 	{text_b = "Long lost friend! Our adventures are always dear on my heart."
-		, text_a = "Out tale will continue some day." , src = "assets/img/person/person7.png"},
-	{text_b = "*hic* those were the days *hic*, don't you remember?" 
+		, text_a = "Our tale will continue some day." , src = "assets/img/person/person7.png"},
+	{text_b = "*hic* those were the days *hic*, don't you remember?"
 		, text_a = "My hiccups are gone." , src = "assets/img/person/person8.png"},
 	{text_b = "Do you not recall our exploits back when the world was young?"
 		, text_a = "How fair was my hair in the days of yore!" , src = "assets/img/person/person9.png"}
@@ -193,7 +193,7 @@ function Scene:keyPress(key, options)
 			love.graphics.print(player_choice[1] .. ":" .. self.choosen_action_id .. "," ..
 							player_choice[2] .. ":" .. self.choosen_location_id .. "," ..
 							player_choice[3] .. ":" .. self.choosen_prop_id,10, 350)
-			
+
 			if (self.choosen_action_id == player_choice[1] and self.choosen_location_id == player_choice[2]
 				and self.choosen_prop_id == player_choice[3]) then
 				self.status = "after"
