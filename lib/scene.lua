@@ -1,6 +1,7 @@
 local class = require "3rdparty/middleclass"
 local tween = require "3rdparty/tween"
 local lume = require "3rdparty/lume"
+local sounds = require "lib/sounds"
 
 
 
@@ -85,7 +86,7 @@ end
 function Scene:reset()
 	rand_index = 1
 	rand_options = {}
-	
+
 	self:populateOptions()
 end
 
@@ -94,7 +95,7 @@ function Scene:populateOptions()
 	local h_a = {}
 	local h_l = {}
 	local h_pr = {}
-	
+
 	for i=1,5 do
 		local break_loop = false
 		while not break_loop do
@@ -115,7 +116,7 @@ function Scene:populateOptions()
 				break_loop = true
 			end
 		end
-		
+
 		break_loop = false
 		while not break_loop do
 			a = math.random(1,#propPack)
@@ -135,9 +136,9 @@ function Scene:populateOptions()
 				break_loop = true
 			end
 		end
-		
+
 	end
-end	
+end
 
 -- choose random text & id
 -- num number that want
@@ -177,6 +178,7 @@ end
 
 -- setup the before
 function Scene:before()
+	sounds:ask()
 	self.status = "before"
 end
 -- setup the after
@@ -248,9 +250,9 @@ function Scene:keyPress(key, options)
 	elseif key == "left" then
 		options:changeChoice('l')
 	elseif (key == "return" or key == "kpenter") then
-		if self.status == "before" then
+		if self.status == "before" and not sounds:isPlaying() then
 			self.status = "middle"
-		elseif self.status == "middle" then
+		elseif self.status == "middle" and not sounds:isPlaying() then
 			player_choice = options:getChoice()
 			-- debug!
 			love.graphics.setColor(0, 0, 0, 255)
@@ -260,8 +262,10 @@ function Scene:keyPress(key, options)
 
 			if (self.choosen_action_id == player_choice[1] and self.choosen_location_id == player_choice[2]
 				and self.choosen_prop_id == player_choice[3]) then
+				sounds:yes()
 				self.status = "after"
 			else
+				sounds:no()
 				self:rage()
 			end
 			love.graphics.setColor(255, 255, 255, 255)
