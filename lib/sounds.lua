@@ -15,10 +15,10 @@ function Sounds:initialize()
 		local hey_str = "assets/sound/hey" .. i .. ".ogg"
 		local yes_str = "assets/sound/yes" .. i .. ".ogg"
 
-		voices[i] = { ask = love.audio.newSource(ask_str),
-					  no  = love.audio.newSource(no_str),
-					  hey = love.audio.newSource(hey_str),
-					  yes = love.audio.newSource(yes_str) }
+		voices[i] = { ask = love.audio.newSource(ask_str, "stream"),
+					  no  = love.audio.newSource(no_str, "stream"),
+					  hey = love.audio.newSource(hey_str, "stream"),
+					  yes = love.audio.newSource(yes_str, "stream") }
     end
 end
 
