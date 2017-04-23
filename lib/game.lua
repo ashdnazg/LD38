@@ -45,13 +45,8 @@ function Game:draw()
 	self.scene:draw_action();
 	love.graphics.setStencilTest()
 	-- draw menu
-<<<<<<< HEAD
 	self.options:draw(self.scene.status)
-=======
-	self.options:draw()
 	self.Timer:draw_timer()
->>>>>>> origin/master
-	-- draw glass / mouse
 end
 
 function Game:update(dt)
