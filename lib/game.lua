@@ -49,7 +49,10 @@ function Game:draw()
 end
 
 function Game:update(dt)
-	self.timer:count_time(dt)
+	local curr_phase = self.scene:getPhase()
+	if curr_phase == "middle" then
+		self.timer:count_time(dt)
+	end
 end
 
 function Game:keyPress(key)

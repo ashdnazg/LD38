@@ -9,14 +9,14 @@ local lume = require "3rdparty/lume"
 
 empty_background = love.graphics.newImage("assets/img/locations/background.png")
 actionsPack = {
-	{text = "played tennis"    , src = "assets/img/personprop/personprop1.png"},
-	{text = "fought"   , src = "assets/img/personprop/personprop2.png"},
-	{text = "studied"    , src = "assets/img/personprop/personprop3.png"},
-	{text = "partied"    , src = "assets/img/personprop/personprop4.png"},
-	{text = "hiked"   , src = "assets/img/personprop/personprop5.png"},
-	{text = "scuba-dived"    , src = "assets/img/personprop/personprop6.png"},
-	{text = "pillaged"   , src = "assets/img/personprop/personprop7.png"},
-	{text = "hacked"   , src = "assets/img/personprop/anon.png"}
+	{text = "played tennis", src = "assets/img/personprop/personprop1.png"},
+	{text = "fought", src = "assets/img/personprop/personprop2.png"},
+	{text = "studied", src = "assets/img/personprop/personprop3.png"},
+	{text = "partied", src = "assets/img/personprop/personprop4.png"},
+	{text = "hiked", src = "assets/img/personprop/personprop5.png"},
+	{text = "scuba-dived", src = "assets/img/personprop/personprop6.png"},
+	{text = "pillaged", src = "assets/img/personprop/personprop7.png"},
+	{text = "hacked", src = "assets/img/personprop/anon.png"}
 }
 
 locationsPack  = {
@@ -123,6 +123,11 @@ function Scene:middle()
    self.currentPersonPosition = 640
 	self.status = "middle"
 end
+
+function Scene:getPhase()
+	return self.status
+end
+
 -- if someone was wrong
 function Scene:rage()
 	self.rageMove = {430,440,450,440,435,440,445,440}
