@@ -60,7 +60,9 @@ function Street:keyPress(key)
 		self.lastFrame = self.frame
 		self.frameTime = 0.1
 	end
-	--self.advanceTo('game')
+	if key == 's' then
+		self.advanceTo('game')
+	end
 end
 
 function Street:mousePressed(x, y, button)
