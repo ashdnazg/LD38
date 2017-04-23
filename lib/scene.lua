@@ -65,6 +65,8 @@ end
  function Scene:random_options(data,choose_id,num)
 	local num = num or 5
 	local options 		= {}
+	--fist value nil
+	options[1] = nil
 	local all_avialible_options = {}
 	for i=1, #data do
 		if i ~= choose_id then
@@ -82,7 +84,7 @@ end
 	
     num = 	 math.random(1, #options) 
 	options[num] = { id = choose_id ,text = data[choose_id]["text"]}
-	
+	options[#options+1] = nil
 	return options
 	
  end
@@ -92,8 +94,18 @@ function Scene:get()
 	local get_random_options = {location = self:random_options(locationsPack,self.choosen_location_id) , action = self:random_options(actionsPack,self.choosen_action_id) ,prop = self:random_options(propPack,self.choosen_prop_id)}
 	return {random_options = get_random_options , location = self.choosen_location ,person = self.choosen_person, action = self.choosen_action , prop = self.choosen_prop}
 end
+
+
+-- setup the before 
+function Scene:before()
+	self.personPosition = 640
+	self.status = "before"
+end
+
+
 -- setup the scene 
 function Scene:start()
+	self.status = "start"
    -- set random id values
    self.choosen_person_id   = math.random(1,#personPack) 
    self.choosen_action_id   = math.random(1,#actionsPack) 
@@ -137,15 +149,19 @@ function Scene:draw_position(data,box)
 	return {x = math.random(box["x"][1],box["x"][2]) ,  y = math.random(box["y"][1],box["y"][2]) }
 end
 function Scene:draw_location()
-	love.graphics.draw(self.choosen_location["img"],self.pick_position_location["x"],self.pick_position_location["y"])
+	if self.status == "start" then
+		love.graphics.draw(self.choosen_location["img"],self.pick_position_location["x"],self.pick_position_location["y"])
+	end
 end
 function Scene:draw_prop()
-	
-	love.graphics.draw(self.choosen_prop["img"],self.pick_position_prop["x"],self.pick_position_prop["y"])
+	if self.status == "start" then
+		love.graphics.draw(self.choosen_prop["img"],self.pick_position_prop["x"],self.pick_position_prop["y"])
+	end
 end
 function Scene:draw_action()
-	
-	love.graphics.draw(self.choosen_action["img"],self.pick_position_action["x"],self.pick_position_action["y"])
+	if self.status == "start" then
+		love.graphics.draw(self.choosen_action["img"],self.pick_position_action["x"],self.pick_position_action["y"])
+	end
 end
 function Scene:draw_person()
 	
