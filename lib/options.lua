@@ -168,7 +168,7 @@ end
 function Options:mousePressed(x, y, button)
 	local width = self.Font1:getWidth("We ")
 	local height = self.Font1:getHeight( )
-
+	
 	-- first three are moving between the different parts
 	if self:insideRectangle(x, y, box_l[1], box_t[1]-1,	box_r[1]-box_l[1], height) then
 		self.currentSelection = 1

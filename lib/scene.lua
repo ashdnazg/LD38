@@ -56,7 +56,7 @@ personPack  = {
 		, text_a = "We should do that again sometime!" , src = "assets/img/person/person3.png"},
 	{text_b = "You look like you don't remember me, but we had a great time!"
 		, text_a = "Wait, what were we talking about?" , src = "assets/img/person/person4.png"},
-	{text_b = "Lieber Freund, es ist unglaublich dass du mich vergessen!"
+	{text_b = "Liebe Freund, es ist unglaublich dass du mich vergessen!"
 		, text_a = "Ja, das war wunderbar!" , src = "assets/img/person/person5.png"},
 	{text_b = "We made that pie together once! Oh and remember that time???"
 		, text_a = "MAN and then we had that steak and went bowling..." , src = "assets/img/person/person6.png"},
@@ -241,24 +241,19 @@ function Scene:start()
 end
 
 function Scene:keyPress(key, options)
-	if key == "up" then
+	if key == "up" or key == "w" then
 		options:changeChoice('u')
-	elseif key == "down" then
+	elseif key == "down" or key == "s" then
 		options:changeChoice('d')
-	elseif key == "right" then
+	elseif key == "right" or key == "d"  then
 		options:changeChoice('r')
-	elseif key == "left" then
+	elseif key == "left" or key == "a"  then
 		options:changeChoice('l')
 	elseif (key == "return" or key == "kpenter") then
 		if self.status == "before" and not sounds:isPlaying() then
 			self.status = "middle"
 		elseif self.status == "middle" and not sounds:isPlaying() then
 			player_choice = options:getChoice()
-			-- debug!
-			love.graphics.setColor(0, 0, 0, 255)
-			love.graphics.print(player_choice[1] .. ":" .. self.choosen_action_id .. "," ..
-							player_choice[2] .. ":" .. self.choosen_location_id .. "," ..
-							player_choice[3] .. ":" .. self.choosen_prop_id,10, 350)
 
 			if (self.choosen_action_id == player_choice[1] and self.choosen_location_id == player_choice[2]
 				and self.choosen_prop_id == player_choice[3]) then
@@ -268,7 +263,6 @@ function Scene:keyPress(key, options)
 				sounds:no()
 				self:rage()
 			end
-			love.graphics.setColor(255, 255, 255, 255)
 		elseif self.status == "after" then
 			return true
 		end
@@ -316,7 +310,8 @@ end
 -- end draw functions
 
 function Scene:mousePressed(x, y, button, options)
-	if self:insideRectangle(x, y, 555, 370, 75, 20) then
+	if self:insideRectangle(x, y, 555, 370, 75, 20) or 
+		self:insideRectangle(x, y, 1, 1, 639, 299) then
 		self:keyPress("return", options)
 	end
 end
