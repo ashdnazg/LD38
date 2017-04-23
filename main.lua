@@ -6,6 +6,7 @@ require 'lib/endgame'
 require 'lib/pregame'
 require 'lib/scene'
 require 'lib/options'
+require 'lib/timer'
 local state, game, endgame, pregame
 
 

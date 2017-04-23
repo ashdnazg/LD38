@@ -14,7 +14,7 @@ end
 
 function Options:set(scene_data)
     self.scene_data  = scene_data
-	self.currentLook = {3, 3, 3}
+	self.currentLook = {5, 5, 5}
 	self.currentSelection = 2
 end
 
@@ -44,9 +44,10 @@ function Options:draw()
 	love.graphics.setColor(0, 0, 0, 255)
 	local start_y = 330
 	
-	local action_data = self.scene_data["random_options"]["action"]
-	local prop_data   = self.scene_data["random_options"]["prop"]
-	local loc_data    = self.scene_data["random_options"]["location"]
+	local data = {}
+	data[1] = self.scene_data["random_options"]["action"]
+	data[2] = self.scene_data["random_options"]["location"]
+	data[3] = self.scene_data["random_options"]["prop"]
 	
 	local box_l = {}
 	local box_t = {}
@@ -58,10 +59,10 @@ function Options:draw()
 	local height = self.Font1:getHeight( )
 	
 	love.graphics.setFont(self.Font2)
-	love.graphics.print(action_data[self.currentLook[1]]["text"] .. " ",10 + width, start_y)
+	love.graphics.print(data[1][self.currentLook[1]]["text"] .. " ",10 + width, start_y)
 	box_l[1] = width + 8
 	box_t[1] = start_y + 2
-	width = width + self.Font2:getWidth(action_data[self.currentLook[1]]["text"] .. " ")
+	width = width + self.Font2:getWidth(data[1][self.currentLook[1]]["text"] .. " ")
 	box_r[1] = width + 8
 	
 --	love.graphics.setFont(self.Font1)
@@ -69,14 +70,14 @@ function Options:draw()
 --	width = width + self.Font1:getWidth("together ")
 	
 --	love.graphics.setFont(self.Font2)
-	if width + self.Font2:getWidth(loc_data[self.currentLook[2]]["text"]) > 630 then
+	if width + self.Font2:getWidth(data[2][self.currentLook[2]]["text"]) > 630 then
 		width = 0
 		start_y = start_y + height
 	end
-	love.graphics.print(loc_data[self.currentLook[2]]["text"],10 + width, start_y)
+	love.graphics.print(data[2][self.currentLook[2]]["text"],10 + width, start_y)
 	box_l[2] = width + 8
 	box_t[2] = start_y + 2
-	width = width + self.Font2:getWidth(loc_data[self.currentLook[2]]["text"])
+	width = width + self.Font2:getWidth(data[2][self.currentLook[2]]["text"])
 	box_r[2] = width + 8
 	
 	love.graphics.setFont(self.Font1)
@@ -84,14 +85,14 @@ function Options:draw()
 	width = width + self.Font1:getWidth(", ")
 	
 	love.graphics.setFont(self.Font2)
-	if width + self.Font2:getWidth(prop_data[self.currentLook[3]]["text"]) > 630 then
+	if width + self.Font2:getWidth(data[3][self.currentLook[3]]["text"]) > 630 then
 		width = 0
 		start_y = start_y + height
 	end
-	love.graphics.print(prop_data[self.currentLook[3]]["text"],10 + width, start_y)
+	love.graphics.print(data[3][self.currentLook[3]]["text"],10 + width, start_y)
 	box_l[3] = width + 8
 	box_t[3] = start_y + 2
-	width = width + self.Font2:getWidth(prop_data[self.currentLook[3]]["text"])
+	width = width + self.Font2:getWidth(data[3][self.currentLook[3]]["text"])
 	box_r[3] = width + 8
 	
 	love.graphics.setFont(self.Font1)
@@ -121,9 +122,10 @@ function Options:draw()
 -- other selection options
 	love.graphics.setColor(0, 0, 0, 170)
 	love.graphics.setFont(self.Font2)
-	love.graphics.print(prop_data[self.currentLook[self.currentSelection]-1]["text"],box_l[self.currentSelection],
+	local temp_data
+	love.graphics.print(data[self.currentSelection][self.currentLook[self.currentSelection]-1]["text"],box_l[self.currentSelection],
 						box_t[self.currentSelection]-height-6)
-	love.graphics.print(prop_data[self.currentLook[self.currentSelection]+1]["text"],box_l[self.currentSelection],
+	love.graphics.print(data[self.currentSelection][self.currentLook[self.currentSelection]+1]["text"],box_l[self.currentSelection],
 						box_t[self.currentSelection]+height+6)
 						
 -- reset colour

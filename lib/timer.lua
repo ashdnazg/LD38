@@ -5,36 +5,36 @@ local class = require "3rdparty/middleclass"
 
 Timer = class('Game')
 
-local elapsed = 0
-local end_game = 30
-
-
-
+function Timer:initialize()
+	self.elapsed = 0
+	self.end_game = 30
+end
+	
 function Timer:reset()
-	elapsed = 0
+	self.elapsed = 0
 end
 
 function Timer:count_time(delta_time)
-	elapsed = elapsed + delta_time
+	self.elapsed = self.elapsed + delta_time
 end
 
 function Timer:is_game_over()
-	if elapsed > end_game then
-		--	time is up
-		return true
-	else
-		return false
-	end
+	return self.elapsed > self.end_game
 end
 
 -- draws the timer rectangle
 function Timer:draw_timer()	
-	local max_width = 200
-	
-	local x = (640 - max_width) + (elapsed*max_width)/end_game
-	local y = 350
-	local h = 50
-	local w = (elapsed*max_width)/end_game
-	love.graphics.rectangle("fill", x, y, w, h )
+	local max_width = 150
+	local start_x = 640 - max_width - 20
+	local y = 20
+	local h = 25
+	local w = math.min((self.elapsed/self.end_game)*max_width,max_width)
 
+	love.graphics.setColor(252, 20, 20, 255)
+	love.graphics.rectangle("line", start_x, y, max_width, h )
+	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.rectangle("fill", start_x+1, y+1, max_width-2, h-2)
+	love.graphics.setColor(252, 20, 20, 255)
+	love.graphics.rectangle("fill", start_x, y, w, h )
+	love.graphics.setColor(255, 255, 255, 255)
 end
