@@ -9,38 +9,41 @@ local lume = require "3rdparty/lume"
 
 empty_background = love.graphics.newImage("assets/img/locations/background.png")
 actionsPack = {
-	{text = "1111111"    , src = "assets/img/personprop/personprop1.png"},
-	{text = "222222"   , src = "assets/img/personprop/personprop2.png"},
-	{text = "33333333"    , src = "assets/img/personprop/personprop3.png"},
-	{text = "4444444"    , src = "assets/img/personprop/personprop4.png"},
-	{text = "55555555"   , src = "assets/img/personprop/personprop5.png"},
-	{text = "6666666"    , src = "assets/img/personprop/personprop6.png"},
-	{text = "7777777"   , src = "assets/img/personprop/personprop7.png"}
+	{text = "played tennis"    , src = "assets/img/personprop/personprop1.png"},
+	{text = "fought"   , src = "assets/img/personprop/personprop2.png"},
+	{text = "studied"    , src = "assets/img/personprop/personprop3.png"},
+	{text = "partied"    , src = "assets/img/personprop/personprop4.png"},
+	{text = "hiked"   , src = "assets/img/personprop/personprop5.png"},
+	{text = "scuba-dived"    , src = "assets/img/personprop/personprop6.png"},
+	{text = "pillaged"   , src = "assets/img/personprop/personprop7.png"},
+	{text = "hacked"   , src = "assets/img/personprop/anon.png"}
 }
-locationsPack  = {
-	{text = "11111111" ,  src = "assets/img/locations/bathroom.png"},
-	{text = "22222222" ,  src = "assets/img/locations/desert_island.png"},
-	{text = "3333333" ,  src = "assets/img/locations/north_pole.png"},
-	{text = "44444444" ,  src = "assets/img/locations/prison.png"},
-	{text = "55555555" ,  src = "assets/img/locations/school.png"},
-	{text = "666666666" ,  src = "assets/img/locations/space.png"},
-	{text = "77777777" ,  src = "assets/img/locations/volcano.png"},
-	{text = "88888888" ,  src = "assets/img/locations/tennis_court.png"},
-	{text = "9999999999" ,  src = "assets/img/locations/western_front.png"}
-}
-propPack  = {
-	{text = "1111111" , src = "assets/img/generic props/somme.png"},
-	{text = "22222222" , src = "assets/img/generic props/alien.png"},
-	{text = "3333333" , src = "assets/img/generic props/babysit.png"},
-	{text = "4444444" , src = "assets/img/generic props/bankrobber.png"},
-	{text = "555555" , src = "assets/img/generic props/cthulhu.png"},
-	{text = "6666666" , src = "assets/img/generic props/fred.png"},
-	{text = "7777777" , src = "assets/img/generic props/hurricane.png"},
-	{text = "8888888" , src = "assets/img/generic props/planecrash.png"},
-	{text = "9999999" , src = "assets/img/generic props/queen.png"},
-	{text = "9999999" , src = "assets/img/generic props/shark.png"},
 
+locationsPack  = {
+	{text = "in the bathroom" ,  src = "assets/img/locations/bathroom.png"},
+	{text = "on the deserted island" ,  src = "assets/img/locations/desert_island.png"},
+	{text = "in the north pole" ,  src = "assets/img/locations/north_pole.png"},
+	{text = "in prison" ,  src = "assets/img/locations/prison.png"},
+	{text = "in school" ,  src = "assets/img/locations/school.png"},
+	{text = "in space" ,  src = "assets/img/locations/space.png"},
+	{text = "next to that volcano" ,  src = "assets/img/locations/volcano.png"},
+	{text = "at the tennis court" ,  src = "assets/img/locations/tennis_court.png"},
+	{text = "in the battle of the Somme" ,  src = "assets/img/locations/western_front.png"}
 }
+
+propPack  = {
+	{text = "with the 7th division" , src = "assets/img/generic props/somme.png"},
+	{text = "during the alien invasion" , src = "assets/img/generic props/alien.png"},
+	{text = "while babysitting" , src = "assets/img/generic props/babysit.png"},
+	{text = "during the bank robbery" , src = "assets/img/generic props/bankrobber.png"},
+	{text = "with Cthulhu" , src = "assets/img/generic props/cthulhu.png"},
+	{text = "with Fred" , src = "assets/img/generic props/fred.png"},
+	{text = "during the hurricane" , src = "assets/img/generic props/hurricane.png"},
+	{text = "during that place crash" , src = "assets/img/generic props/planecrash.png"},
+	{text = "with the queen" , src = "assets/img/generic props/queen.png"},
+	{text = "with that weird shark" , src = "assets/img/generic props/shark.png"},
+}
+
 personPack  = {
 	{text = "111111111" , src = "assets/img/person/person1.png"},
 	{text = "222222222" , src = "assets/img/person/person2.png"},
