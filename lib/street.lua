@@ -128,5 +128,7 @@ function Street:keyPress(key)
 end
 
 function Street:mousePressed(x, y, button)
-	self.advanceTo('game')
+	if self.animTime <= 0 and key == 'return' then
+		self.advanceTo('game')
+	end
 end
