@@ -2,6 +2,9 @@ local class = require "3rdparty/middleclass"
 local tween = require "3rdparty/tween"
 local lume = require "3rdparty/lume"
 
+rand_names = {"Dave", "Jane", "George", "Ahmed", "Joacim", "Sabrina",
+			"Carl", "Samantha", "Hrothgar", "Nathanel"}
+
 -- Options : build the option bar and text with it
 Options = class('Options')
 function Options:initialize()
@@ -138,11 +141,17 @@ function Options:draw(scene_status)
 		local height = self.Font1:getHeight( )
 		love.graphics.setFont(self.Font2)
 		love.graphics.print("You: ummm....",10, start_y + height)
+		self.name_chosen = false
+		self.rand_name = ""
 	elseif scene_status == 'after' then
 		love.graphics.setColor(0, 0, 0, 255)
-		local person_b = self.scene_data["person"]["text_a"]
+		local person_a = self.scene_data["person"]["text_a"]
+		if self.name_chosen == false then
+			self.rand_name = rand_names[math.random(1,#rand_names)]
+			self.name_chosen = true
+		end
 		love.graphics.setFont(self.Font1)
-		love.graphics.print("???: " .. person_b,10, start_y)
+		love.graphics.print(self.rand_name .. ": " .. person_a,10, start_y)
 
 	end
 	
