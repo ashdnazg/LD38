@@ -45,15 +45,15 @@ propPack  = {
 }
 
 personPack  = {
-	{text = "111111111" , src = "assets/img/person/person1.png"},
-	{text = "222222222" , src = "assets/img/person/person2.png"},
-	{text = "3333333333" , src = "assets/img/person/person3.png"},
-	{text = "444444444" , src = "assets/img/person/person4.png"},
-	{text = "444444444" , src = "assets/img/person/person5.png"},
-	{text = "444444444" , src = "assets/img/person/person6.png"},
-	{text = "444444444" , src = "assets/img/person/person7.png"},
-	{text = "444444444" , src = "assets/img/person/person8.png"},
-	{text = "444444444" , src = "assets/img/person/person9.png"}
+	{text_b = "111111111" , src = "assets/img/person/person1.png"},
+	{text_b = "222222222" , src = "assets/img/person/person2.png"},
+	{text_b = "3333333333", src = "assets/img/person/person3.png"},
+	{text_b = "444444444" , src = "assets/img/person/person4.png"},
+	{text_b = "444444444" , src = "assets/img/person/person5.png"},
+	{text_b = "444444444" , src = "assets/img/person/person6.png"},
+	{text_b = "444444444" , src = "assets/img/person/person7.png"},
+	{text_b = "444444444" , src = "assets/img/person/person8.png"},
+	{text_b = "444444444" , src = "assets/img/person/person9.png"}
 }
 
 
@@ -157,6 +157,37 @@ function Scene:start()
    self.pick_position_action = self:draw_position(self.choosen_action,self.actionPosition)
    self.pick_position_person = self:draw_position(self.choosen_person,self.personPosition)
 end
+
+function Scene:keyPress(key, options)
+	if key == "up" then
+		options:changeChoice('u')
+	elseif key == "down" then
+		options:changeChoice('d')
+	elseif key == "right" then
+		options:changeChoice('r')
+	elseif key == "left" then
+		options:changeChoice('l')
+	elseif (key == "return" or key == "kpenter") then
+		if self.status == "before" then
+			self.status = "middle"
+		elseif self.status == "middle" then
+			player_choice = options:getChoice()
+			-- debug!
+			love.graphics.setColor(0, 0, 0, 255)
+			love.graphics.print(player_choice[1] .. ":" .. self.choosen_action_id .. "," ..
+							player_choice[2] .. ":" .. self.choosen_location_id .. "," ..
+							player_choice[3] .. ":" .. self.choosen_prop_id,10, 350)
+			
+			if (self.choosen_action_id == player_choice[1] and self.choosen_location_id == player_choice[2]
+				and self.choosen_prop_id == player_choice[3]) then
+				self.status = "after"
+			else
+				self:rage()
+			end
+			love.graphics.setColor(255, 255, 255, 255)
+		end
+	end
+ end
 
 -- draws functions
 function Scene:draw_position(data,box)

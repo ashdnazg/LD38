@@ -24,7 +24,7 @@ end
 function Game:start()
 -- start new stage (crzy peorson again...)
 	self.scene:start()
-	self.scene:middle()
+	self.scene:before()
 	self.options:set(self.scene:get())
 end
 
@@ -53,15 +53,7 @@ function Game:update(dt)
 end
 
 function Game:keyPress(key)
-	if love.keyboard.isDown("up") then
-		self.options:changeChoice('u')
-	elseif love.keyboard.isDown("down") then
-		self.options:changeChoice('d')
-	elseif love.keyboard.isDown("right") then
-		self.options:changeChoice('r')
-	elseif love.keyboard.isDown("left") then
-		self.options:changeChoice('l')
-	end
+	self.scene:keyPress(key, self.options)
 end
 
 function Game:mousePressed(x, y, button)
