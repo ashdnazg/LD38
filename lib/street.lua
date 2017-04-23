@@ -49,7 +49,7 @@ function Street:reset()
 	self.dropSpots = {}
 	self.canWalk = true
 	for i = 1, math.random(3,5) do
-		self.dropSpots[math.random(1, math.floor(STREET_END / STEP_SIZE)) * STEP_SIZE] = true
+		self.dropSpots[math.random(1, math.floor((STREET_END - 70) / STEP_SIZE)) * STEP_SIZE] = true
 	end
 end
 
@@ -76,7 +76,7 @@ function Street:draw()
 	if self.dropping then
 		local start = self.dir == 1 and -167 or 480
 		local curY = lume.smooth(start, self.yPos + 70, 1 - self.animTime / ANIM_TIME)
-		love.graphics.draw(self.droppers[self.dropping], self.xPos + 100, curY)
+		love.graphics.draw(self.droppers[self.dropping], self.xPos + 70, curY)
 	end
 	love.graphics.draw(self.bar,0,300)
 	if self.dropping and self.animTime <= 0 then
@@ -86,11 +86,17 @@ function Street:draw()
 		end
 		love.graphics.setColor(0,0,0,255)
 		love.graphics.setFont(self.font)
-		love.graphics.print("Hey! What a small world!",10, 330)
+		love.graphics.print("???: Hey! What a small world!",10, 330)
 		love.graphics.setColor(255,255,255,255)
 		if not sounds.isPlaying() then
 			love.graphics.draw(self.enter_image, 555, 370)
 		end
+	end
+	if self.xPos > STREET_END then
+		love.graphics.setColor(0,0,0,255)
+		love.graphics.setFont(self.font)
+		love.graphics.print("You: *zip*",10, 330)
+		love.graphics.setColor(255,255,255,255)
 	end
 end
 
