@@ -55,3 +55,9 @@ end
 function love.draw()
 	states[state]:draw()
 end
+
+function love.wheelmoved(x, y)
+	if states[state].wheelmoved then
+		states[state]:wheelmoved(x,y)
+	end
+end

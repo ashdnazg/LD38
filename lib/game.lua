@@ -65,3 +65,11 @@ end
 function Game:mousePressed(x, y, button)
 	self.options:mousePressed(x, y, button)
 end
+
+function Game:wheelmoved(x,y)
+	if y > 0 then
+		self:keyPress("up")
+	elseif y < 0 then 
+		self:keyPress("down")
+	end
+end
