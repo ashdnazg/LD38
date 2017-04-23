@@ -9,9 +9,9 @@ Timer = class('Game')
 
 function Timer:initialize()
 	self.elapsed = 0
-	self.end_game = 30
+	self.end_game = 60
 end
-	
+
 function Timer:reset()
 	self.elapsed = 0
 end
@@ -25,7 +25,7 @@ function Timer:is_game_over()
 end
 
 -- draws the timer rectangle
-function Timer:draw_timer()	
+function Timer:draw_timer()
 	local max_width = 150
 	local start_x = 640 - max_width - 20
 	local y = 20

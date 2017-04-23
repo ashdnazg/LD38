@@ -2,7 +2,8 @@ math.randomseed(os.time())
 math.random()
 
 require 'lib/game'
-require 'lib/endgame'
+require 'lib/victory'
+require 'lib/defeat'
 require 'lib/pregame'
 require 'lib/scene'
 require 'lib/options'
@@ -15,7 +16,7 @@ local timer
 
 
 local function advanceTo(newState)
-	if newState == 'endgame' then
+	if newState == 'defeat' or newState == 'victory' then
 		states.street.newGame = true
 	end
 	state = newState
@@ -30,7 +31,8 @@ local function init()
 	-- music:play()
 	timer = Timer:new()
 	states.game = Game:new(advanceTo, timer)
-	states.endgame = Endgame:new(advanceTo)
+	states.defeat = Defeat:new(advanceTo)
+	states.victory = Victory:new(advanceTo)
 	states.pregame = PreGame:new(advanceTo)
 	states.street = Street:new(advanceTo, timer)
 	advanceTo('pregame')
