@@ -26,6 +26,7 @@ function Game:start()
 	self.scene:start()
 	self.scene:before()
 	self.options:set(self.scene:get())
+	love.mouse.setPosition(200,200)
 end
 
 
@@ -70,7 +71,7 @@ end
 function Game:wheelmoved(x,y)
 	if y > 0 then
 		self:keyPress("up")
-	elseif y < 0 then 
+	elseif y < 0 then
 		self:keyPress("down")
 	end
 end
