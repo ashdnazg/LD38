@@ -7,35 +7,48 @@ local lume = require "3rdparty/lume"
 -- tables with data 
 
 actionsPack = {
-	{text = "1111111" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
-	{text = "222222" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
-	{text = "33333333" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
-	{text = "4444444" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
-	{text = "55555555" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"},
-	{text = "6666666" , position = { x = 440 , y = 200}   , src = "assets/img/test.jpg"}
-
+	{text = "1111111"    , src = "assets/img/personprop/personprop1.png"},
+	{text = "222222"   , src = "assets/img/personprop/personprop2.png"},
+	{text = "33333333"    , src = "assets/img/personprop/personprop3.png"},
+	{text = "4444444"    , src = "assets/img/personprop/personprop4.png"},
+	{text = "55555555"   , src = "assets/img/personprop/personprop5.png"},
+	{text = "6666666"    , src = "assets/img/personprop/personprop6.png"},
+	{text = "7777777"   , src = "assets/img/personprop/personprop7.png"}
 }
 locationsPack  = {
-	{text = "11111111" ,  src = "assets/img/locations/western_front.png"},
-	{text = "22222222" ,  src = "assets/img/locations/western_front.png"},
-	{text = "3333333" ,  src = "assets/img/locations/western_front.png"},
-	{text = "44444444" ,  src = "assets/img/locations/western_front.png"},
-	{text = "55555555" ,  src = "assets/img/locations/western_front.png"},
-	{text = "666666666" ,  src = "assets/img/locations/western_front.png"}
+	{text = "11111111" ,  src = "assets/img/locations/bathroom.png"},
+	{text = "22222222" ,  src = "assets/img/locations/desert_island.png"},
+	{text = "3333333" ,  src = "assets/img/locations/north_pole.png"},
+	{text = "44444444" ,  src = "assets/img/locations/prison.png"},
+	{text = "55555555" ,  src = "assets/img/locations/school.png"},
+	{text = "666666666" ,  src = "assets/img/locations/space.png"},
+	{text = "77777777" ,  src = "assets/img/locations/volcano.png"},
+	{text = "88888888" ,  src = "assets/img/locations/tennis_court.png"},
+	{text = "9999999999" ,  src = "assets/img/locations/western_front.png"}
 }
 propPack  = {
 	{text = "1111111" , src = "assets/img/generic props/somme.png"},
-	{text = "22222222" , src = "assets/img/generic props/somme.png"},
-	{text = "3333333" , src = "assets/img/generic props/somme.png"},
-	{text = "4444444" , src = "assets/img/generic props/somme.png"},
-	{text = "555555" , src = "assets/img/generic props/somme.png"},
-	{text = "6666666" , src = "assets/img/generic props/somme.png"}
+	{text = "22222222" , src = "assets/img/generic props/alien.png"},
+	{text = "3333333" , src = "assets/img/generic props/babysit.png"},
+	{text = "4444444" , src = "assets/img/generic props/bankrobber.png"},
+	{text = "555555" , src = "assets/img/generic props/cthulhu.png"},
+	{text = "6666666" , src = "assets/img/generic props/fred.png"},
+	{text = "7777777" , src = "assets/img/generic props/hurricane.png"},
+	{text = "8888888" , src = "assets/img/generic props/planecrash.png"},
+	{text = "9999999" , src = "assets/img/generic props/queen.png"},
+	{text = "9999999" , src = "assets/img/generic props/shark.png"},
+
 }
 personPack  = {
-	{text = "111111111" , src = "assets/img/person/person.png"},
-	{text = "222222222" , src = "assets/img/person/person.png"},
-	{text = "3333333333" , src = "assets/img/person/person.png"},
-	{text = "444444444" , src = "assets/img/person/person.png"},
+	{text = "111111111" , src = "assets/img/person/person1.png"},
+	{text = "222222222" , src = "assets/img/person/person2.png"},
+	{text = "3333333333" , src = "assets/img/person/person3.png"},
+	{text = "444444444" , src = "assets/img/person/person4.png"},
+	{text = "444444444" , src = "assets/img/person/person5.png"},
+	{text = "444444444" , src = "assets/img/person/person6.png"},
+	{text = "444444444" , src = "assets/img/person/person7.png"},
+	{text = "444444444" , src = "assets/img/person/person8.png"},
+	{text = "444444444" , src = "assets/img/person/person9.png"}
 }
 
 
