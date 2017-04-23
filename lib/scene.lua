@@ -16,7 +16,9 @@ actionsPack = {
 	{text = "hiked", src = "assets/img/personprop/personprop5.png"},
 	{text = "scuba-dived", src = "assets/img/personprop/personprop6.png"},
 	{text = "pillaged", src = "assets/img/personprop/personprop7.png"},
-	{text = "hacked", src = "assets/img/personprop/anon.png"}
+	{text = "hacked", src = "assets/img/personprop/anon.png"},
+	{text = "yodeled", src = "assets/img/personprop/yodel.png"},
+	{text = "watched a movie", src = "assets/img/personprop/movie.png"}
 }
 
 locationsPack  = {
