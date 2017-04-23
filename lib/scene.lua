@@ -31,7 +31,8 @@ locationsPack  = {
 	{text = "in space" ,  src = "assets/img/locations/space.png"},
 	{text = "next to that volcano" ,  src = "assets/img/locations/volcano.png"},
 	{text = "at the tennis court" ,  src = "assets/img/locations/tennis_court.png"},
-	{text = "in the battle of the Somme" ,  src = "assets/img/locations/western_front.png"}
+	{text = "in the battle of the Somme" ,  src = "assets/img/locations/western_front.png"},
+	{text = "in the Taj Mahal" ,  src = "assets/img/locations/tajmahal.png"}
 }
 
 propPack  = {
