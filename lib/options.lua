@@ -154,7 +154,9 @@ function Options:draw(scene_status)
 			self.name_chosen = true
 		end
 		love.graphics.setFont(self.Font1)
-		love.graphics.print(self.rand_name .. ": " .. person_a,10, start_y)
+		love.graphics.print(self.rand_name .. ": " .. person_a,10, start_y+10)
+		love.graphics.setColor(0, 0, 0, 170)
+		love.graphics.print("We "..self.scene_data.action.text .. " "..self.scene_data.location.text.." " ..self.scene_data.prop.text,10, start_y-20)
 
 	end
 

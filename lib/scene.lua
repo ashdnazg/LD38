@@ -76,7 +76,7 @@ local rand_options
 Scene = class('Scene')
 function Scene:initialize()
     self.personPosition 	= { x = {440,440} , y = {100,100}}
-	self.propPosition 	= { x = {0,340}   , y = {0,200} }
+	self.propPosition 	= { x = {0,280}   , y = {0,150} }
 	self.locationPosition = { x = {0,0}   , y = {0,0} }
 	self.actionPosition   = { x = {440,440}   , y = {100,100} }
 	rand_options = {}
@@ -203,6 +203,8 @@ function Scene:rage()
 end
 -- setup the scene
 function Scene:start()
+	self.moveToStreet = false
+	self.movePersonToStreet = false
    self.rageMove = {}
    self.currentPersonPosition = 640
    -- set random id values
@@ -279,20 +281,20 @@ function Scene:draw_position(data,box)
 	return {x = math.random(box["x"][1],box["x"][2]) ,  y = math.random(box["y"][1],box["y"][2]) }
 end
 function Scene:draw_location()
-	if self.status == "middle" then
+	if self.status ~= "before" then
 		love.graphics.draw(self.choosen_location["img"],self.pick_position_location["x"],self.pick_position_location["y"])
 	else
 		love.graphics.draw(empty_background,self.pick_position_location["x"],self.pick_position_location["y"])
 	end
 end
 function Scene:draw_prop()
-	if self.status == "middle" then
+	if self.status ~= "before" then
 		love.graphics.draw(self.choosen_prop["img"],self.pick_position_prop["x"],self.pick_position_prop["y"])
 	end
 end
 function Scene:draw_action()
-	if self.status == "middle" then
-		love.graphics.draw(self.choosen_action["img"],self.pick_position_action["x"],self.pick_position_action["y"])
+	if self.status ~= "before" then
+		love.graphics.draw(self.choosen_action["img"],self.currentPersonPosition,self.pick_position_action["y"])
 	end
 end
 function Scene:draw_person()
@@ -304,7 +306,14 @@ function Scene:draw_person()
 		self.currentPersonPosition = self.currentPersonPosition <= 449 and 440 or self.currentPersonPosition - 9
 		love.graphics.draw(self.choosen_person["img"],self.currentPersonPosition,100)
 	elseif self.status == "after" then
-		self.currentPersonPosition = self.currentPersonPosition >= 631 and 640 or self.currentPersonPosition + 9
+	
+		self.currentPersonPosition = self.currentPersonPosition >= 631  and 640 or self.currentPersonPosition + 9
+		if self.movePersonToStreet ~= true then
+			self.currentPersonPosition = 440
+		end
+		if self.currentPersonPosition == 640 and self.movePersonToStreet then
+			self.moveToStreet = true
+		end 
 		love.graphics.draw(self.choosen_person["img"],self.currentPersonPosition,100)
 	end
 end

@@ -31,7 +31,7 @@ end
 
 
 function Game:draw()
-	if self.scene.status ~= after then
+	if self.scene.status ~= "after" then
 		love.graphics.stencil(glassStencil, "replace", 1)
 		love.graphics.setStencilTest("greater", 0)
 	end
@@ -39,17 +39,17 @@ function Game:draw()
 	self.scene:draw_location();
 	-- draw prop
 	self.scene:draw_prop();
-	if self.scene.status ~= after then
+	if self.scene.status ~= "after" then
 		love.graphics.setStencilTest()
 	end
 	-- draw person
 	self.scene:draw_person();
-	if self.scene.status ~= after then
+	if self.scene.status ~= "after" then
 		love.graphics.setStencilTest("greater", 0)
 	end
 	-- draw action
 	self.scene:draw_action();
-	if self.scene.status ~= after then
+	if self.scene.status ~= "after" then
 		love.graphics.setStencilTest()
 	end
 	-- draw menu
@@ -65,12 +65,17 @@ function Game:update(dt)
 	if self.timer:is_game_over() then
 		self.advanceTo('defeat')
 	end
+	if self.scene.moveToStreet then
+		self.scene.moveToStreet = false
+		self.advanceTo("street")
+	end
 end
 
 function Game:keyPress(key)
 	isCorrect = self.scene:keyPress(key, self.options)
-	if isCorrect then
-		self.advanceTo("street")
+	if isCorrect and self.scene.moveToStreet ~= true then
+		 self.scene.movePersonToStreet = true
+		
 	end
 end
 
