@@ -4,7 +4,7 @@ local lume = require "3rdparty/lume"
 
 
 
--- tables with data 
+-- tables with data
 
 
 empty_background = love.graphics.newImage("assets/img/locations/background.png")
@@ -39,8 +39,8 @@ propPack  = {
 	{text = "with Cthulhu" , src = "assets/img/generic props/cthulhu.png"},
 	{text = "with Fred" , src = "assets/img/generic props/fred.png"},
 	{text = "during the hurricane" , src = "assets/img/generic props/hurricane.png"},
-	{text = "during that place crash" , src = "assets/img/generic props/planecrash.png"},
-	{text = "with the queen" , src = "assets/img/generic props/queen.png"},
+	{text = "during that plane crash" , src = "assets/img/generic props/planecrash.png"},
+	{text = "with Her Majesty" , src = "assets/img/generic props/queen.png"},
 	{text = "with that weird shark" , src = "assets/img/generic props/shark.png"},
 }
 
@@ -81,53 +81,53 @@ end
 
 	while #all_avialible_options > 0 and num >= #options do
 		local count = 0
-		local id_pick = math.random(1,#all_avialible_options) 
+		local id_pick = math.random(1,#all_avialible_options)
 		options[#options+1] = all_avialible_options[id_pick]
 		all_avialible_options[id_pick] = all_avialible_options[#all_avialible_options]
 		all_avialible_options[#all_avialible_options] = nil
 	end
-	
-    num = 	 math.random(2, #options) 
+
+    num = 	 math.random(2, #options)
 	options[num] = { id = choose_id ,text = data[choose_id]["text"]}
 	options[#options+1] = {id = -1 , text = " " }
 	return options
-	
+
  end
 -- return the choosen values + id , img
 function Scene:get()
- 
+
 	local get_random_options = {location = self:random_options(locationsPack,self.choosen_location_id) , action = self:random_options(actionsPack,self.choosen_action_id) ,prop = self:random_options(propPack,self.choosen_prop_id)}
 	return {random_options = get_random_options , location = self.choosen_location ,person = self.choosen_person, action = self.choosen_action , prop = self.choosen_prop}
 end
 
 
--- setup the before 
+-- setup the before
 function Scene:before()
 	self.status = "before"
 end
--- setup the after 
+-- setup the after
 function Scene:after()
 	self.status = "after"
 end
--- setup the after 
+-- setup the after
 function Scene:middle()
-   self.currentPersonPosition = 640 
+   self.currentPersonPosition = 640
 	self.status = "middle"
 end
--- if someone was wrong 
+-- if someone was wrong
 function Scene:rage()
 	self.rageMove = {430,440,450,440,435,440,445,440}
 	self.status = "middle"
 end
--- setup the scene 
+-- setup the scene
 function Scene:start()
    self.rageMove = {}
-   self.currentPersonPosition = 640 
+   self.currentPersonPosition = 640
    -- set random id values
-   self.choosen_person_id   = math.random(1,#personPack) 
-   self.choosen_action_id   = math.random(1,#actionsPack) 
-   self.choosen_prop_id     = math.random(1,#propPack) 
-   self.choosen_location_id = math.random(1,#locationsPack) 
+   self.choosen_person_id   = math.random(1,#personPack)
+   self.choosen_action_id   = math.random(1,#actionsPack)
+   self.choosen_prop_id     = math.random(1,#propPack)
+   self.choosen_location_id = math.random(1,#locationsPack)
    -- add values if not exists
    if not personPack[self.choosen_person_id]["id"] then
 		personPack[self.choosen_person_id]["id"]  = self.choosen_person_id
@@ -150,12 +150,12 @@ function Scene:start()
    self.choosen_prop     	= propPack[ self.choosen_prop_id ]
    self.choosen_location 	= locationsPack[ self.choosen_location_id ]
    self.choosen_person 		= personPack[ self.choosen_person_id ]
-   
+
    -- set position
-   self.pick_position_location = self:draw_position(self.choosen_location,self.locationPosition) 
-   self.pick_position_prop = self:draw_position(self.choosen_prop,self.propPosition) 
-   self.pick_position_action = self:draw_position(self.choosen_action,self.actionPosition) 
-   self.pick_position_person = self:draw_position(self.choosen_person,self.personPosition) 
+   self.pick_position_location = self:draw_position(self.choosen_location,self.locationPosition)
+   self.pick_position_prop = self:draw_position(self.choosen_prop,self.propPosition)
+   self.pick_position_action = self:draw_position(self.choosen_action,self.actionPosition)
+   self.pick_position_person = self:draw_position(self.choosen_person,self.personPosition)
 end
 
 -- draws functions
@@ -168,7 +168,7 @@ end
 function Scene:draw_location()
 	if self.status == "middle" then
 		love.graphics.draw(self.choosen_location["img"],self.pick_position_location["x"],self.pick_position_location["y"])
-	else 
+	else
 		love.graphics.draw(empty_background,self.pick_position_location["x"],self.pick_position_location["y"])
 	end
 end

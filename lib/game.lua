@@ -4,28 +4,27 @@ local lume = require "3rdparty/lume"
 
 
 Game = class('Game')
-local GLASS_RADIUS = 45
+local GLASS_RADIUS = 50
 
 
 local function glassStencil()
 	local x, y = love.mouse.getPosition()
-	love.graphics.circle("fill", x, y, 50)
+	love.graphics.circle("fill", x, y, GLASS_RADIUS)
 end
 
 
 
-function Game:initialize(endsReached, advanceToEndgame)
-	self.advanceToEndgame = advanceToEndgame
-	self.endsReached = endsReached
+function Game:initialize(advanceTo, timer)
+	self.advanceTo = advanceTo
 	self.scene = Scene:new()
 	self.options = Options:new()
-	self.Timer = Timer:new()
+	self.timer = timer
 end
 
 function Game:start()
 -- start new stage (crzy peorson again...)
 	self.scene:start()
-	self.scene:before()
+	self.scene:middle()
 	self.options:set(self.scene:get())
 end
 
@@ -46,11 +45,11 @@ function Game:draw()
 	love.graphics.setStencilTest()
 	-- draw menu
 	self.options:draw(self.scene.status)
-	self.Timer:draw_timer()
+	self.timer:draw_timer()
 end
 
 function Game:update(dt)
-	self.Timer:count_time(dt)
+	self.timer:count_time(dt)
 end
 
 function Game:keyPress(key)

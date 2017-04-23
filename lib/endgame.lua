@@ -4,9 +4,8 @@ local lume = require '3rdparty/lume'
 
 Endgame = class('Endgame')
 
-function Endgame:initialize(endsReached, advanceToGame)
-	self.advanceToGame = advanceToGame
-	self.endsReached = endsReached
+function Endgame:initialize(advanceTo)
+	self.advanceTo = advanceTo
 end
 
 function Endgame:start(endType)
@@ -21,11 +20,11 @@ end
 
 function Endgame:keyPress(key)
 	if key == ' ' or key == 'return' then
-        self.advanceToGame()
+        self.advanceTo('street')
 		return
     end
 end
 
 function Endgame:mousePressed(x, y, key)
-	self.advanceToGame()
+	self.advanceTo('street')
 end

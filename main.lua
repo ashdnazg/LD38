@@ -7,27 +7,20 @@ require 'lib/pregame'
 require 'lib/scene'
 require 'lib/options'
 require 'lib/timer'
-local state, game, endgame, pregame
+require 'lib/street'
+
+local state
+local states = {}
+local timer
 
 
-
---TODO: nice transitions or something
-local function advanceToGame()
-	state = 'ingame'
+local function advanceTo(newState)
+	if newState == 'endgame' then
+		states.street.newGame = true
+	end
+	state = newState
 	love.graphics.setColor(255, 255, 255, 255)
-	game:start()
-end
-
-local function advanceToPreGame()
-	state = 'pregame'
-	love.graphics.setColor(255, 255, 255, 255)
-	pregame:start()
-end
-
-local function advanceToEndgame()
-	state = 'endgame'
-	love.graphics.setColor(255, 255, 255, 255)
-	endgame:start()
+	states[newState]:start()
 end
 
 local function init()
@@ -35,11 +28,12 @@ local function init()
 	-- music:setVolume(0.2)
 	-- music:setLooping(true)
 	-- music:play()
-	state = 'ingame'
-	game = Game:new(endsReached, advanceToEndgame)
-	endgame = Endgame:new(endsReached, advanceToPreGame)
-	pregame = PreGame:new(endsReached, advanceToGame)
-	advanceToPreGame()
+	timer = Timer:new()
+	states.game = Game:new(advanceTo, timer)
+	states.endgame = Endgame:new(advanceTo)
+	states.pregame = PreGame:new(advanceTo)
+	states.street = Street:new(advanceTo, timer)
+	advanceTo('pregame')
 end
 
 function love.load()
@@ -47,41 +41,17 @@ function love.load()
 end
 
 function love.update(dt)
-	if state == 'ingame' then
-		game:update(dt)
-	elseif state == 'endgame' then
-		endgame:update(dt)
-	elseif state == 'pregame' then
-		pregame:update(dt)
-	end
+	states[state]:update(dt)
 end
 
 function love.keypressed(key)
-	if state == 'ingame' then
-		game:keyPress(key)
-	elseif state == 'endgame' then
-		endgame:keyPress(key)
-	elseif state == 'pregame' then
-		pregame:keyPress(key)
-	end
+	states[state]:keyPress(key)
 end
 
 function love.mousepressed(x, y, button)
-	if state == "ingame" then
-		game:mousePressed(x, y, button)
-	elseif state == 'endgame' then
-		endgame:mousePressed(x, y, button)
-	elseif state == 'pregame' then
-		pregame:mousePressed(x, y, button)
-	end
+	states[state]:mousePressed(x, y, button)
 end
 
 function love.draw()
-	if state == 'ingame' then
-		game:draw()
-	elseif state == "endgame" then
-		endgame:draw()
-	elseif state == 'pregame' then
-		pregame:draw()
-	end
+	states[state]:draw()
 end

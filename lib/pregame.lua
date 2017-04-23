@@ -4,9 +4,8 @@ local lume = require "3rdparty/lume"
 
 PreGame = class('PreGame')
 
-function PreGame:initialize(endsReached, advanceToGame)
-	self.advanceToGame = advanceToGame
-	self.endsReached = endsReached
+function PreGame:initialize(advanceTo)
+	self.advanceTo = advanceTo
 end
 
 function PreGame:start()
@@ -23,9 +22,9 @@ function PreGame:update(dt)
 end
 
 function PreGame:keyPress(key)
-	self.advanceToGame()
+	self.advanceTo('street')
 end
 
 function PreGame:mousePressed(x, y, button)
-	self.advanceToGame()
+	self.advanceTo('street')
 end
