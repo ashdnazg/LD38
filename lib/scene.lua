@@ -66,7 +66,7 @@ end
 	local num = num or 5
 	local options 		= {}
 	--fist value nil
-	options[1] = nil
+	options[1] = {id = -1 , text = " " }
 	local all_avialible_options = {}
 	for i=1, #data do
 		if i ~= choose_id then
@@ -84,7 +84,7 @@ end
 	
     num = 	 math.random(1, #options) 
 	options[num] = { id = choose_id ,text = data[choose_id]["text"]}
-	options[#options+1] = nil
+	options[#options+1] = {id = -1 , text = " " }
 	return options
 	
  end
@@ -164,8 +164,11 @@ function Scene:draw_action()
 	end
 end
 function Scene:draw_person()
-	
-	love.graphics.draw(self.choosen_person["img"],self.pick_position_person["x"],self.pick_position_person["y"])
+	if self.status == "start" then
+		love.graphics.draw(self.choosen_person["img"],self.pick_position_person["x"],self.pick_position_person["y"])
+	elseif self.status == "before" then
+		love.graphics.draw(self.choosen_person["img"],self.pick_position_person["x"],self.pick_position_person["y"])
+	end
 end
 -- end draw functions
 
