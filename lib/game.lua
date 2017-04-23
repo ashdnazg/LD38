@@ -2,6 +2,7 @@ local class = require "3rdparty/middleclass"
 local tween = require "3rdparty/tween"
 local lume = require "3rdparty/lume"
 
+
 Game = class('Game')
 local GLASS_RADIUS = 45
 
@@ -18,6 +19,7 @@ function Game:initialize(endsReached, advanceToEndgame)
 	self.endsReached = endsReached
 	self.scene = Scene:new()
 	self.options = Options:new()
+	self.Timer = Timer:new()
 end
 
 function Game:start()
@@ -43,16 +45,29 @@ function Game:draw()
 	self.scene:draw_action();
 	love.graphics.setStencilTest()
 	-- draw menu
+<<<<<<< HEAD
 	self.options:draw(self.scene.status)
+=======
+	self.options:draw()
+	self.Timer:draw_timer()
+>>>>>>> origin/master
 	-- draw glass / mouse
 end
 
 function Game:update(dt)
-
+	self.Timer:count_time(dt)
 end
 
 function Game:keyPress(key)
-
+	if love.keyboard.isDown("up") then
+		self.options:changeChoice('u')
+	elseif love.keyboard.isDown("down") then
+		self.options:changeChoice('d')
+	elseif love.keyboard.isDown("right") then
+		self.options:changeChoice('r')
+	elseif love.keyboard.isDown("left") then
+		self.options:changeChoice('l')
+	end
 end
 
 function Game:mousePressed(x, y, button)
