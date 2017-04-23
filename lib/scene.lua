@@ -41,7 +41,7 @@ propPack  = {
 	{text = "during the bank robbery" , src = "assets/img/generic props/bankrobber.png"},
 	{text = "with Cthulhu" , src = "assets/img/generic props/cthulhu.png"},
 	{text = "with Fred" , src = "assets/img/generic props/fred.png"},
-	{text = "during the hurricane" , src = "assets/img/generic props/hurricane.png"},
+	{text = "during the tornado" , src = "assets/img/generic props/hurricane.png"},
 	{text = "during that plane crash" , src = "assets/img/generic props/planecrash.png"},
 	{text = "with Her Majesty" , src = "assets/img/generic props/queen.png"},
 	{text = "with that weird shark" , src = "assets/img/generic props/shark.png"},
