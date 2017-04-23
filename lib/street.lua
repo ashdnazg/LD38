@@ -1,6 +1,7 @@
 local class = require "3rdparty/middleclass"
 local tween = require "3rdparty/tween"
 local lume = require "3rdparty/lume"
+local sounds = require "lib/sounds"
 
 Street = class('Street')
 
@@ -79,11 +80,17 @@ function Street:draw()
 	end
 	love.graphics.draw(self.bar,0,300)
 	if self.dropping and self.animTime <= 0 then
+		if not self.playedHey then
+			sounds:hey()
+			self.playedHey = true
+		end
 		love.graphics.setColor(0,0,0,255)
 		love.graphics.setFont(self.font)
 		love.graphics.print("Hey! What a small world!",10, 330)
 		love.graphics.setColor(255,255,255,255)
-		love.graphics.draw(self.enter_image, 555, 370)
+		if not sounds.isPlaying() then
+			love.graphics.draw(self.enter_image, 555, 370)
+		end
 	end
 end
 
@@ -117,18 +124,17 @@ function Street:keyPress(key)
 			self.animTime = ANIM_TIME
 			self.dropping = math.random(#self.droppers)
 			self.dir = math.random(1,2)
+			sounds:changeVoice()
+			self.playedHey = false
 		end
 	end
-	if self.animTime <= 0 and self.dropping and key == 'return' then
-		self.advanceTo('game')
-	end
-	if key == 's' then
+	if self.animTime <= 0 and self.dropping and key == 'return' and not sounds.isPlaying() then
 		self.advanceTo('game')
 	end
 end
 
 function Street:mousePressed(x, y, button)
-	if self.animTime <= 0 and self.dropping and key == 'return' then
+	if self.animTime <= 0 and self.dropping and key == 'return' and not sounds.isPlaying() then
 		self.advanceTo('game')
 	end
 end

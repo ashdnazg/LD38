@@ -2,19 +2,19 @@ local class = require "3rdparty/middleclass"
 local tween = require "3rdparty/tween"
 local lume = require "3rdparty/lume"
 
-Sounds = class('Sounds')
+local Sounds = class('Sounds')
 
 local voiceChosen
 local voices = {}
 
 function Sounds:initialize()
-	voiceChosen = 1
+	voiceChosen = 0
 	for i=1,9 do
 		local ask_str = "assets/sound/ask" .. i .. ".ogg"
 		local no_str  = "assets/sound/no"  .. i .. ".ogg"
 		local hey_str = "assets/sound/hey" .. i .. ".ogg"
 		local yes_str = "assets/sound/yes" .. i .. ".ogg"
-		
+
 		voices[i] = { ask = love.audio.newSource(ask_str),
 					  no  = love.audio.newSource(no_str),
 					  hey = love.audio.newSource(hey_str),
@@ -22,8 +22,11 @@ function Sounds:initialize()
     end
 end
 
-function Sounds:changeVoice(voice_id)
-	voiceChosen = voice_id
+function Sounds:changeVoice()
+	local previousVoice = voiceChosen
+	while voiceChosen == previousVoice do
+		voiceChosen = math.random(1, #voices)
+	end
 end
 
 function Sounds:ask()
@@ -49,3 +52,12 @@ function Sounds:yes()
     voices[voiceChosen]["yes"]:setLooping(false)
     voices[voiceChosen]["yes"]:play()
 end
+
+function Sounds:isPlaying()
+	return voices[voiceChosen]["ask"]:isPlaying() or
+	       voices[voiceChosen]["no"]:isPlaying() or
+	       voices[voiceChosen]["hey"]:isPlaying() or
+	       voices[voiceChosen]["yes"]:isPlaying()
+end
+
+return Sounds:new()
