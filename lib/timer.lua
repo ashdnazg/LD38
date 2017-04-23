@@ -9,7 +9,9 @@ Timer = class('Game')
 
 function Timer:initialize()
 	self.elapsed = 0
-	self.end_game = 60
+	self.initial_end_game = 60
+	self.end_game = self.initial_end_game
+	self.step = 10
 end
 
 function Timer:reset()

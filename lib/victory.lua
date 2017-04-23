@@ -4,12 +4,16 @@ local lume = require '3rdparty/lume'
 
 Victory = class('Victory')
 
-function Victory:initialize(advanceTo)
+function Victory:initialize(advanceTo, timer)
 	self.advanceTo = advanceTo
 	self.image = love.graphics.newImage("assets/img/victory.png")
+	self.timer = timer
 end
 
-function Victory:start(endType)
+function Victory:start()
+	if self.timer.end_game > self.timer.initial_end_game then
+		self.timer.end_game = self.timer.end_game - self.timer.step
+	end
 end
 
 
