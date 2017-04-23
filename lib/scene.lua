@@ -65,7 +65,7 @@ end
 -- choose random text & id
 -- num number that want
  function Scene:random_options(data,choose_id,num)
-	local num = num or 6
+	local num = num or 5
 	local options 		= {}
 	--fist value nil
 	options[1] = {id = -1 , text = " " }
