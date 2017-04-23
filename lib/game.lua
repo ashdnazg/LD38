@@ -53,7 +53,10 @@ function Game:update(dt)
 end
 
 function Game:keyPress(key)
-	self.scene:keyPress(key, self.options)
+	isCorrect = self.scene:keyPress(key, self.options)
+	if isCorrect then
+		self.advanceTo("street")
+	end
 end
 
 function Game:mousePressed(x, y, button)

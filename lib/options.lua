@@ -139,7 +139,11 @@ function Options:draw(scene_status)
 		love.graphics.setFont(self.Font2)
 		love.graphics.print("You: ummm....",10, start_y + height)
 	elseif scene_status == 'after' then
-		
+		love.graphics.setColor(0, 0, 0, 255)
+		local person_b = self.scene_data["person"]["text_a"]
+		love.graphics.setFont(self.Font1)
+		love.graphics.print("???: " .. person_b,10, start_y)
+
 	end
 	
 -- reset colour

@@ -45,15 +45,15 @@ propPack  = {
 }
 
 personPack  = {
-	{text_b = "111111111" , src = "assets/img/person/person1.png"},
-	{text_b = "222222222" , src = "assets/img/person/person2.png"},
-	{text_b = "3333333333", src = "assets/img/person/person3.png"},
-	{text_b = "444444444" , src = "assets/img/person/person4.png"},
-	{text_b = "444444444" , src = "assets/img/person/person5.png"},
-	{text_b = "444444444" , src = "assets/img/person/person6.png"},
-	{text_b = "444444444" , src = "assets/img/person/person7.png"},
-	{text_b = "444444444" , src = "assets/img/person/person8.png"},
-	{text_b = "444444444" , src = "assets/img/person/person9.png"}
+	{text_b = "111111111" , text_a = "111111111" , src = "assets/img/person/person1.png"},
+	{text_b = "222222222" , text_a = "111111111" , src = "assets/img/person/person2.png"},
+	{text_b = "333333333",  text_a = "111111111" , src = "assets/img/person/person3.png"},
+	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person4.png"},
+	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person5.png"},
+	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person6.png"},
+	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person7.png"},
+	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person8.png"},
+	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person9.png"}
 }
 
 
@@ -185,8 +185,11 @@ function Scene:keyPress(key, options)
 				self:rage()
 			end
 			love.graphics.setColor(255, 255, 255, 255)
+		elseif self.status == "after" then
+			return true
 		end
 	end
+	return false
  end
 
 -- draws functions
