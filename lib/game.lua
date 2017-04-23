@@ -31,19 +31,27 @@ end
 
 
 function Game:draw()
-	love.graphics.stencil(glassStencil, "replace", 1)
-	love.graphics.setStencilTest("greater", 0)
+	if self.scene.status ~= after then
+		love.graphics.stencil(glassStencil, "replace", 1)
+		love.graphics.setStencilTest("greater", 0)
+	end
 	-- draw background
 	self.scene:draw_location();
 	-- draw prop
 	self.scene:draw_prop();
-	love.graphics.setStencilTest()
+	if self.scene.status ~= after then
+		love.graphics.setStencilTest()
+	end
 	-- draw person
 	self.scene:draw_person();
-	love.graphics.setStencilTest("greater", 0)
+	if self.scene.status ~= after then
+		love.graphics.setStencilTest("greater", 0)
+	end
 	-- draw action
 	self.scene:draw_action();
-	love.graphics.setStencilTest()
+	if self.scene.status ~= after then
+		love.graphics.setStencilTest()
+	end
 	-- draw menu
 	self.options:draw(self.scene.status)
 	self.timer:draw_timer()
