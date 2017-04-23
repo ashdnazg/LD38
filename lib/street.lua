@@ -68,9 +68,12 @@ end
 function Street:draw()
 	love.graphics.print('street',0,0)
 	love.graphics.draw(self.bg)
+	if not self.canWalk then
+		self.frame = 'mad'
+	end
 	love.graphics.draw(self.frames[self.frame],self.xPos,self.yPos)
 	self.timer:draw_timer()
-	if self.frameTime <= 0 and self.frame ~= 'stand' then
+	if self.canWalk and self.frameTime <= 0 and self.frame ~= 'stand' then
 		self.frame = 'stand'
 	end
 	if self.dropping then
