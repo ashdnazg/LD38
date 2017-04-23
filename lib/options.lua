@@ -19,8 +19,8 @@ function Options:initialize()
 	self.Font2 = love.graphics.setNewFont("assets/font/OpenSans-Bold.ttf",16)
 	self.Font1 = love.graphics.setNewFont("assets/font/OpenSans-Regular.ttf",16)
 	
-	local enter_src = "assets/img/enter.png"
-	self.enter_image = love.graphics.newImage(enter_src)
+	self.enter_image = love.graphics.newImage("assets/img/enter.png")
+	self.options_bar = love.graphics.newImage("assets/img/options_bar.png")
 end
 
 function Options:set(scene_data)
@@ -51,7 +51,7 @@ function Options:changeChoice(direction)
 end
 
 function Options:draw(scene_status)
-    love.graphics.draw(love.graphics.newImage("assets/img/options_bar.png"),0,300)
+    love.graphics.draw(self.options_bar,0,300)
 	local start_y = 330
 	if scene_status == 'middle' then
 		love.graphics.setColor(0, 0, 0, 255)
