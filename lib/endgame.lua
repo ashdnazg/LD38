@@ -26,5 +26,5 @@ function Endgame:keyPress(key)
 end
 
 function Endgame:mousePressed(x, y, key)
-	self.advanceTo('street')
+	self.advanceTo('intro')
 end

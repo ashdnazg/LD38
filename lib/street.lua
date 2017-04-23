@@ -4,6 +4,10 @@ local lume = require "3rdparty/lume"
 
 Street = class('Street')
 
+local STREET_END = 570
+local STEP_SIZE = 12
+local ANIM_TIME = 2
+
 function Street:initialize(advanceTo, timer)
 	self.advanceTo = advanceTo
 	self.timer = timer
@@ -18,6 +22,17 @@ function Street:initialize(advanceTo, timer)
 		right = love.graphics.newImage('assets/img/street/man_right.png'),
 		mad = love.graphics.newImage('assets/img/street/man_mad.png'),
 	}
+
+	self.droppers = {
+		love.graphics.newImage('assets/img/street/damn_alien.png'),
+		love.graphics.newImage('assets/img/street/damn_girl.png'),
+		love.graphics.newImage('assets/img/street/damn_marry.png'),
+		love.graphics.newImage('assets/img/street/damn_somo.png'),
+		love.graphics.newImage('assets/img/street/damn_super.png'),
+		love.graphics.newImage('assets/img/street/damn_tall_1.png'),
+		love.graphics.newImage('assets/img/street/damn_tall_2.png'),
+		love.graphics.newImage('assets/img/street/damn_with_parachute.png'),
+	}
 end
 
 function Street:reset()
@@ -27,6 +42,13 @@ function Street:reset()
 	self.yPos = 70
 	self.frame = 'stand'
 	self.frameTime = 0
+	self.animTime = 0
+	self.dropping = nil
+	self.dropSpots = {}
+	self.canWalk = true
+	for i = 1, math.random(3,5) do
+		self.dropSpots[math.random(1, math.floor(STREET_END / STEP_SIZE)) * STEP_SIZE] = true
+	end
 end
 
 
@@ -40,25 +62,47 @@ end
 function Street:draw()
 	love.graphics.print('street',0,0)
 	love.graphics.draw(self.bg)
-	love.graphics.draw(self.bar,0,300)
 	love.graphics.draw(self.frames[self.frame],self.xPos,self.yPos)
 	self.timer:draw_timer()
 	if self.frameTime <= 0 and self.frame ~= 'stand' then
 		self.frame = 'stand'
 	end
+	if self.dropping then
+		local start = self.dir == 1 and -167 or 480
+		local curY = lume.smooth(start, self.yPos + 70, 1 - self.animTime / ANIM_TIME)
+		love.graphics.draw(self.droppers[self.dropping], self.xPos + 100, curY)
+	end
+	love.graphics.draw(self.bar,0,300)
 end
 
 function Street:update(dt)
 	self.frameTime = self.frameTime - dt
-	self.timer:count_time(dt)
+	self.animTime = self.animTime - dt
+	if self.animTime <= 0 then
+		self.timer:count_time(dt)
+	end
+	if self.xPos > STREET_END and self.animTime <= 0 then
+		self.advanceTo('endgame')
+	end
 end
 
 function Street:keyPress(key)
-	if key == 'right' then
-		self.xPos = self.xPos + 12
+	if key == 'right' and self.canWalk then
+		self.xPos = self.xPos + STEP_SIZE
 		self.frame = self.lastFrame == 'left' and 'right' or 'left'
 		self.lastFrame = self.frame
 		self.frameTime = 0.1
+		if self.xPos > STREET_END then
+			self.canWalk = false
+			self.animTime = 2
+		end
+		if self.dropSpots[self.xPos] then
+			self.canWalk = false
+			self.dropSpots[self.xPos] = nil
+			self.animTime = ANIM_TIME
+			self.dropping = math.random(#self.droppers)
+			self.dir = math.random(1,2)
+		end
 	end
 	if key == 's' then
 		self.advanceTo('game')
