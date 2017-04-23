@@ -6,6 +6,8 @@ local lume = require "3rdparty/lume"
 
 -- tables with data 
 
+
+empty_background = love.graphics.newImage("assets/img/locations/background.png")
 actionsPack = {
 	{text = "1111111"    , src = "assets/img/personprop/personprop1.png"},
 	{text = "222222"   , src = "assets/img/personprop/personprop2.png"},
@@ -63,7 +65,7 @@ end
 -- choose random text & id
 -- num number that want
  function Scene:random_options(data,choose_id,num)
-	local num = num or 5
+	local num = num or 6
 	local options 		= {}
 	--fist value nil
 	options[1] = {id = -1 , text = " " }
@@ -82,7 +84,7 @@ end
 		all_avialible_options[#all_avialible_options] = nil
 	end
 	
-    num = 	 math.random(1, #options) 
+    num = 	 math.random(2, #options) 
 	options[num] = { id = choose_id ,text = data[choose_id]["text"]}
 	options[#options+1] = {id = -1 , text = " " }
 	return options
@@ -98,14 +100,26 @@ end
 
 -- setup the before 
 function Scene:before()
-	self.personPosition = 640
 	self.status = "before"
 end
-
-
+-- setup the after 
+function Scene:after()
+	self.status = "after"
+end
+-- setup the after 
+function Scene:middle()
+   self.currentPersonPosition = 640 
+	self.status = "middle"
+end
+-- if someone was wrong 
+function Scene:rage()
+	self.rageMove = {430,440,450,440,435,440,445,440}
+	self.status = "middle"
+end
 -- setup the scene 
 function Scene:start()
-	self.status = "start"
+   self.rageMove = {}
+   self.currentPersonPosition = 640 
    -- set random id values
    self.choosen_person_id   = math.random(1,#personPack) 
    self.choosen_action_id   = math.random(1,#actionsPack) 
@@ -149,25 +163,33 @@ function Scene:draw_position(data,box)
 	return {x = math.random(box["x"][1],box["x"][2]) ,  y = math.random(box["y"][1],box["y"][2]) }
 end
 function Scene:draw_location()
-	if self.status == "start" then
+	if self.status == "middle" then
 		love.graphics.draw(self.choosen_location["img"],self.pick_position_location["x"],self.pick_position_location["y"])
+	else 
+		love.graphics.draw(empty_background,self.pick_position_location["x"],self.pick_position_location["y"])
 	end
 end
 function Scene:draw_prop()
-	if self.status == "start" then
+	if self.status == "middle" then
 		love.graphics.draw(self.choosen_prop["img"],self.pick_position_prop["x"],self.pick_position_prop["y"])
 	end
 end
 function Scene:draw_action()
-	if self.status == "start" then
+	if self.status == "middle" then
 		love.graphics.draw(self.choosen_action["img"],self.pick_position_action["x"],self.pick_position_action["y"])
 	end
 end
 function Scene:draw_person()
-	if self.status == "start" then
-		love.graphics.draw(self.choosen_person["img"],self.pick_position_person["x"],self.pick_position_person["y"])
+	if self.status == "middle" then
+		local x = #self.rageMove == 0 and self.pick_position_person["x"] or table.remove(self.rageMove,1)
+		self.currentPersonPosition = x
+		love.graphics.draw(self.choosen_person["img"],self.currentPersonPosition,self.pick_position_person["y"])
 	elseif self.status == "before" then
-		love.graphics.draw(self.choosen_person["img"],self.pick_position_person["x"],self.pick_position_person["y"])
+		self.currentPersonPosition = self.currentPersonPosition <= 449 and 440 or self.currentPersonPosition - 9
+		love.graphics.draw(self.choosen_person["img"],self.currentPersonPosition,100)
+	elseif self.status == "after" then
+		self.currentPersonPosition = self.currentPersonPosition >= 631 and 640 or self.currentPersonPosition + 9
+		love.graphics.draw(self.choosen_person["img"],self.currentPersonPosition,100)
 	end
 end
 -- end draw functions

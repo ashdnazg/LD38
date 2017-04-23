@@ -23,6 +23,7 @@ end
 function Game:start()
 -- start new stage (crzy peorson again...)
 	self.scene:start()
+	self.scene:before()
 	self.options:set(self.scene:get())
 end
 
@@ -42,7 +43,7 @@ function Game:draw()
 	self.scene:draw_action();
 	love.graphics.setStencilTest()
 	-- draw menu
-	self.options:draw()
+	self.options:draw(self.scene.status)
 	-- draw glass / mouse
 end
 
