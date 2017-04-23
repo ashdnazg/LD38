@@ -14,7 +14,8 @@ function Street:initialize(advanceTo, timer)
 	self.newGame = true
 	self.bg = love.graphics.newImage('assets/img/background.png')
 	self.bar = love.graphics.newImage("assets/img/options_bar.png")
-
+	self.font = love.graphics.setNewFont("assets/font/OpenSans-Regular.ttf",16)
+	self.enter_image = love.graphics.newImage("assets/img/enter.png")
 
 	self.frames = {
 		stand = love.graphics.newImage('assets/img/street/man_stand_tap.png'),
@@ -56,6 +57,10 @@ function Street:start()
 	if self.newGame then
 		self:reset()
 	end
+	if not self.timer:is_game_over() then
+		self.canWalk = true
+		self.dropping = nil
+	end
 end
 
 
@@ -73,12 +78,22 @@ function Street:draw()
 		love.graphics.draw(self.droppers[self.dropping], self.xPos + 100, curY)
 	end
 	love.graphics.draw(self.bar,0,300)
+	if self.dropping and self.animTime <= 0 then
+		love.graphics.setColor(0,0,0,255)
+		love.graphics.setFont(self.font)
+		love.graphics.print("Hey! What a small world!",10, 330)
+		love.graphics.setColor(255,255,255,255)
+		love.graphics.draw(self.enter_image, 555, 370)
+	end
 end
 
 function Street:update(dt)
+	if self.timer:is_game_over() then
+		self.advanceTo('endgame')
+	end
 	self.frameTime = self.frameTime - dt
 	self.animTime = self.animTime - dt
-	if self.animTime <= 0 then
+	if self.canWalk then
 		self.timer:count_time(dt)
 	end
 	if self.xPos > STREET_END and self.animTime <= 0 then
@@ -103,6 +118,9 @@ function Street:keyPress(key)
 			self.dropping = math.random(#self.droppers)
 			self.dir = math.random(1,2)
 		end
+	end
+	if self.animTime <= 0 and key == 'return' then
+		self.advanceTo('game')
 	end
 	if key == 's' then
 		self.advanceTo('game')
