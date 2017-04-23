@@ -119,7 +119,7 @@ function Street:keyPress(key)
 			self.dir = math.random(1,2)
 		end
 	end
-	if self.animTime <= 0 and key == 'return' then
+	if self.animTime <= 0 and self.dropping and key == 'return' then
 		self.advanceTo('game')
 	end
 	if key == 's' then
@@ -128,7 +128,7 @@ function Street:keyPress(key)
 end
 
 function Street:mousePressed(x, y, button)
-	if self.animTime <= 0 and key == 'return' then
+	if self.animTime <= 0 and self.dropping and key == 'return' then
 		self.advanceTo('game')
 	end
 end
