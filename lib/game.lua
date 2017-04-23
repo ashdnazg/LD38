@@ -62,6 +62,9 @@ function Game:update(dt)
 	if curr_phase == "middle" then
 		self.timer:count_time(dt)
 	end
+	if self.timer:is_game_over() then
+		self.advanceTo('defeat')
+	end
 end
 
 function Game:keyPress(key)

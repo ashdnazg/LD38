@@ -30,14 +30,14 @@ function Timer:draw_timer()
 	local start_x = 640 - max_width - 20
 	local y = 20
 	local h = 25
-	local w = math.min((self.elapsed/self.end_game)*max_width,max_width)
+	local w = math.min((self.elapsed/self.end_game)*(max_width - 2),max_width - 2)
 
 	love.graphics.setColor(252, 20, 20, 255)
 	love.graphics.rectangle("line", start_x, y, max_width, h )
-	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.setColor(0, 0, 0, 255)
 	love.graphics.rectangle("fill", start_x+1, y+1, max_width-2, h-2)
-	love.graphics.setColor(252, 20, 20, 255)
-	love.graphics.rectangle("fill", start_x, y, w, h )
+	love.graphics.setColor(252, 240, 20, 255)
+	love.graphics.rectangle("fill", start_x+1, y + 1, w, h - 2)
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.draw(clockImage,590,0)
 end
