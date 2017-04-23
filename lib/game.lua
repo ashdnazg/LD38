@@ -63,5 +63,5 @@ function Game:keyPress(key)
 end
 
 function Game:mousePressed(x, y, button)
-
+	self.options:mousePressed(x, y, button)
 end

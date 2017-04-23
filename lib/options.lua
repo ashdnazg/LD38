@@ -5,6 +5,12 @@ local lume = require "3rdparty/lume"
 rand_names = {"Dave", "Jane", "George", "Ahmed", "Joacim", "Sabrina",
 			"Carl", "Samantha", "Hrothgar", "Nathanel"}
 
+-- boxes and triangles
+local box_l = {1,1,1}
+local box_t = {1,1,1}
+local box_r = {1,1,1}
+
+			
 -- Options : build the option bar and text with it
 Options = class('Options')
 function Options:initialize()
@@ -19,8 +25,8 @@ end
 
 function Options:set(scene_data)
     self.scene_data  = scene_data
-	self.currentLook = {5, 5, 5}
-	self.currentSelection = 2
+	self.currentLook = {4, 4, 4}
+	self.currentSelection = 1
 end
 
 function Options:getChoice()
@@ -54,11 +60,7 @@ function Options:draw(scene_status)
 		data[1] = self.scene_data["random_options"]["action"]
 		data[2] = self.scene_data["random_options"]["location"]
 		data[3] = self.scene_data["random_options"]["prop"]
-		
-		local box_l = {}
-		local box_t = {}
-		local box_r = {}
-		
+				
 		love.graphics.setFont(self.Font1)
 		love.graphics.print("We ",10, start_y)
 		local width = self.Font1:getWidth("We ")
@@ -158,4 +160,31 @@ function Options:draw(scene_status)
 -- reset colour
 	love.graphics.setColor(255, 255, 255, 255)
 	love.graphics.draw(self.enter_image, 555, 370)
+end
+
+function Options:mousePressed(x, y, button)
+	local width = self.Font1:getWidth("We ")
+	local height = self.Font1:getHeight( )
+	
+	-- first three are moving between the different parts
+	if self:insideRectangle(x, y, box_l[1], box_t[1]-1,	box_r[1]-box_l[1], height) then
+		self.currentSelection = 1
+	elseif self:insideRectangle(x, y, box_l[2], box_t[2]-1,	box_r[2]-box_l[2], height) then
+		self.currentSelection = 2
+	elseif self:insideRectangle(x, y, box_l[3], box_t[3]-1,	box_r[3]-box_l[3], height) then
+		self.currentSelection = 3
+	-- next twp move the options up or down
+	elseif self:insideRectangle(x, y, box_l[self.currentSelection], box_t[self.currentSelection]-8-height,
+								box_r[self.currentSelection]-box_l[self.currentSelection], height+7) then
+		self:changeChoice('u')
+	elseif self:insideRectangle(x, y, box_l[self.currentSelection], box_t[self.currentSelection]+1+height,
+								box_r[self.currentSelection]-box_l[self.currentSelection], height+7) then
+		self:changeChoice('d')
+
+	end
+end
+
+function Options:insideRectangle(x, y, top_l_x, top_l_y, width, height)
+-- x,y are for the mouse. The other parameters describe the rectangle.
+	return (x > top_l_x and x < top_l_x + width and y > top_l_y and y < top_l_y + height)
 end
