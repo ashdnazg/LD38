@@ -45,15 +45,24 @@ propPack  = {
 }
 
 personPack  = {
-	{text_b = "111111111" , text_a = "111111111" , src = "assets/img/person/person1.png"},
-	{text_b = "222222222" , text_a = "111111111" , src = "assets/img/person/person2.png"},
-	{text_b = "333333333",  text_a = "111111111" , src = "assets/img/person/person3.png"},
-	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person4.png"},
-	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person5.png"},
-	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person6.png"},
-	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person7.png"},
-	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person8.png"},
-	{text_b = "444444444" , text_a = "111111111" , src = "assets/img/person/person9.png"}
+	{text_b = "Hey there, what's up? Don't you remember me?"
+		, text_a = "Oh yeah, that was great! Anyway, gotta go!" , src = "assets/img/person/person1.png"},
+	{text_b = "Oh boy, we sure had a great time back then, remember?"
+		, text_a = "Are you in a hurry? I could talk all day!" , src = "assets/img/person/person2.png"},
+	{text_b = "So happy to see you. I will never leave your side, like that one time!"
+		, text_a = "We should do that again sometime!" , src = "assets/img/person/person3.png"},
+	{text_b = "You look like you don't remember me, but we had a great time!"
+		, text_a = "Wait, what were we talking about?" , src = "assets/img/person/person4.png"},
+	{text_b = "Lieber Freund, es ist unglaublich dass du mich vergessen!"
+		, text_a = "Ja, das war wunderbar!" , src = "assets/img/person/person5.png"},
+	{text_b = "We made that pie together once! Oh and remember that time???"
+		, text_a = "MAN and then we had that steak and went bowling..." , src = "assets/img/person/person6.png"},
+	{text_b = "Long lost friend! Our adventures are always dear on my heart."
+		, text_a = "Out tale will continue some day." , src = "assets/img/person/person7.png"},
+	{text_b = "*hic* those were the days *hic*, don't you remember?" 
+		, text_a = "My hiccups are gone." , src = "assets/img/person/person8.png"},
+	{text_b = "Do you not recall our exploits back when the world was young?"
+		, text_a = "How fair was my hair in the days of yore!" , src = "assets/img/person/person9.png"}
 }
 
 
