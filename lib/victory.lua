@@ -14,7 +14,7 @@ end
 
 
 function Victory:draw()
-	love.graphics.draw(self.victory)
+	love.graphics.draw(self.image)
 end
 
 function Victory:update(dt)
