@@ -247,4 +247,13 @@ function Scene:draw_person()
 end
 -- end draw functions
 
+function Scene:mousePressed(x, y, button, options)
+	if self:insideRectangle(x, y, 555, 370, 75, 20) then
+		self:keyPress("return", options)
+	end
+end
 
+function Scene:insideRectangle(x, y, top_l_x, top_l_y, width, height)
+-- x,y are for the mouse. The other parameters describe the rectangle.
+	return (x > top_l_x and x < top_l_x + width and y > top_l_y and y < top_l_y + height)
+end

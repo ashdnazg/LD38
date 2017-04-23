@@ -173,13 +173,13 @@ function Options:mousePressed(x, y, button)
 		self.currentSelection = 2
 	elseif self:insideRectangle(x, y, box_l[3], box_t[3]-1,	box_r[3]-box_l[3], height) then
 		self.currentSelection = 3
-	-- next twp move the options up or down
+	-- next two move the options up or down
 	elseif self:insideRectangle(x, y, box_l[self.currentSelection], box_t[self.currentSelection]-8-height,
 								box_r[self.currentSelection]-box_l[self.currentSelection], height+7) then
 		self:changeChoice('u')
 	elseif self:insideRectangle(x, y, box_l[self.currentSelection], box_t[self.currentSelection]+1+height,
 								box_r[self.currentSelection]-box_l[self.currentSelection], height+7) then
-		self:changeChoice('d')
+		self:changeChoice('d')		
 	end
 end
 

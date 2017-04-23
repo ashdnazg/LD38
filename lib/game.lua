@@ -64,6 +64,7 @@ end
 
 function Game:mousePressed(x, y, button)
 	self.options:mousePressed(x, y, button)
+	self.scene:mousePressed(x,y,button, self.options)
 end
 
 function Game:wheelmoved(x,y)
