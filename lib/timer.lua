@@ -3,6 +3,8 @@ local lume = require "3rdparty/lume"
 local class = require "3rdparty/middleclass"
 
 
+clockImage = love.graphics.newImage("assets/img/clock.png")
+
 Timer = class('Game')
 
 function Timer:initialize()
@@ -37,4 +39,5 @@ function Timer:draw_timer()
 	love.graphics.setColor(252, 20, 20, 255)
 	love.graphics.rectangle("fill", start_x, y, w, h )
 	love.graphics.setColor(255, 255, 255, 255)
+	love.graphics.draw(clockImage,590,0)
 end
