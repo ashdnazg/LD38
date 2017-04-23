@@ -13,11 +13,13 @@ require 'lib/street'
 local state
 local states = {}
 local timer
+local scene
 
 
 local function advanceTo(newState)
 	if newState == 'defeat' or newState == 'victory' then
 		states.street.newGame = true
+		scene:reset()
 	end
 	state = newState
 	love.graphics.setColor(255, 255, 255, 255)
@@ -30,7 +32,8 @@ local function init()
 	music:setLooping(true)
 	music:play()
 	timer = Timer:new()
-	states.game = Game:new(advanceTo, timer)
+	scene = Scene:new()
+	states.game = Game:new(advanceTo, timer, scene)
 	states.defeat = Defeat:new(advanceTo)
 	states.victory = Victory:new(advanceTo)
 	states.pregame = PreGame:new(advanceTo)

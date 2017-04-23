@@ -67,15 +67,78 @@ personPack  = {
 		, text_a = "How fair was my hair in the days of yore!" , src = "assets/img/person/person9.png"}
 }
 
+local rand_index
+local rand_options
 
 -- Scene : make the scene and control the images and what to show
 Scene = class('Scene')
 function Scene:initialize()
-      self.personPosition 	= { x = {440,440} , y = {100,100}}
-	  self.propPosition 	= { x = {0,340}   , y = {0,200} }
-	  self.locationPosition = { x = {0,0}   , y = {0,0} }
-	  self.actionPosition   = { x = {440,440}   , y = {100,100} }
+    self.personPosition 	= { x = {440,440} , y = {100,100}}
+	self.propPosition 	= { x = {0,340}   , y = {0,200} }
+	self.locationPosition = { x = {0,0}   , y = {0,0} }
+	self.actionPosition   = { x = {440,440}   , y = {100,100} }
+	rand_options = {}
+	rand_index = 1
+	self:populateOptions()
 end
+
+function Scene:reset()
+	rand_index = 1
+	rand_options = {}
+	
+	self:populateOptions()
+end
+
+function Scene:populateOptions()
+	local h_p = {}
+	local h_a = {}
+	local h_l = {}
+	local h_pr = {}
+	
+	for i=1,5 do
+		local break_loop = false
+		while not break_loop do
+			a = math.random(1,#personPack)
+			if not h_p[a] then
+				h_p[a] = true
+				rand_options[i] = {person = a}
+				break_loop = true
+			end
+		end
+
+		break_loop = false
+		while not break_loop do
+			a = math.random(1,#actionsPack)
+			if not h_a[a] then
+				h_a[a] = true
+				rand_options[i]["action"] = a
+				break_loop = true
+			end
+		end
+		
+		break_loop = false
+		while not break_loop do
+			a = math.random(1,#propPack)
+			if not h_pr[a] then
+				h_pr[a] = true
+				rand_options[i]["prop"] = a
+				break_loop = true
+			end
+		end
+
+		break_loop = false
+		while not break_loop do
+			a = math.random(1,#locationsPack)
+			if not h_l[a] then
+				h_l[a] = true
+				rand_options[i]["loc"] = a
+				break_loop = true
+			end
+		end
+		
+	end
+end	
+
 -- choose random text & id
 -- num number that want
  function Scene:random_options(data,choose_id,num)
@@ -140,10 +203,11 @@ function Scene:start()
    self.rageMove = {}
    self.currentPersonPosition = 640
    -- set random id values
-   self.choosen_person_id   = math.random(1,#personPack)
-   self.choosen_action_id   = math.random(1,#actionsPack)
-   self.choosen_prop_id     = math.random(1,#propPack)
-   self.choosen_location_id = math.random(1,#locationsPack)
+   self.choosen_person_id   = rand_options[rand_index]["person"]
+   self.choosen_action_id   = rand_options[rand_index]["action"]
+   self.choosen_prop_id     = rand_options[rand_index]["prop"]
+   self.choosen_location_id = rand_options[rand_index]["loc"]
+   rand_index = rand_index + 1
    -- add values if not exists
    if not personPack[self.choosen_person_id]["id"] then
 		personPack[self.choosen_person_id]["id"]  = self.choosen_person_id

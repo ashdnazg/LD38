@@ -14,9 +14,9 @@ end
 
 
 
-function Game:initialize(advanceTo, timer)
+function Game:initialize(advanceTo, timer, scene)
 	self.advanceTo = advanceTo
-	self.scene = Scene:new()
+	self.scene = scene
 	self.options = Options:new()
 	self.timer = timer
 end
