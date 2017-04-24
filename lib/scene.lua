@@ -24,7 +24,7 @@ actionsPack = {
 
 locationsPack  = {
 	{text = "in the bathroom" ,  src = "assets/img/locations/bathroom.png"},
-	{text = "on the deserted island" ,  src = "assets/img/locations/desert_island.png"},
+	{text = "on the desert island" ,  src = "assets/img/locations/desert_island.png"},
 	{text = "in the north pole" ,  src = "assets/img/locations/north_pole.png"},
 	{text = "in prison" ,  src = "assets/img/locations/prison.png"},
 	{text = "in school" ,  src = "assets/img/locations/school.png"},
