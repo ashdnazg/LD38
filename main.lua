@@ -14,7 +14,7 @@ local state
 local states = {}
 local timer
 local scene
-
+local music
 
 local function advanceTo(newState)
 	if newState == 'defeat' or newState == 'victory' then
@@ -27,7 +27,7 @@ local function advanceTo(newState)
 end
 
 local function init()
-	local music = love.audio.newSource("assets/sound/music.ogg", "stream")
+	music = love.audio.newSource("assets/sound/music.ogg", "stream")
 	music:setVolume(0.4)
 	music:setLooping(true)
 	music:play()
@@ -46,6 +46,10 @@ function love.load()
 end
 
 function love.update(dt)
+	if not music:isPlaying() then
+		music:rewind()
+		music:play()
+	end
 	states[state]:update(dt)
 end
 
