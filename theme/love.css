@@ -17,6 +17,22 @@ body {
     color: rgb( 28, 78, 104 );
 }
 
+info {
+    font-family: arial;
+    font-size: 14px;
+    float: left;
+    position: relative;
+	text-align:left;
+    left: -50%;
+}
+
+bla {
+    float: left;
+    position: relative;
+    left: 50%;
+}
+
+
 footer {
     font-family: arial;
     font-size: 12px;
